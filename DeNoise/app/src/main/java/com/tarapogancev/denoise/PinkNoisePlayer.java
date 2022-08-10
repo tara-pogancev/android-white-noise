@@ -3,6 +3,7 @@ package com.tarapogancev.denoise;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -28,18 +29,16 @@ public class PinkNoisePlayer extends AppCompatActivity {
         whiteNoiseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            }
-        });
-
-        whiteNoiseButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+                Intent intent = new Intent(PinkNoisePlayer.this, WhiteNoisePlayer.class);
+                startActivity(intent);
             }
         });
 
         brownNoiseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(PinkNoisePlayer.this, BrownNoisePlayer.class);
+                startActivity(intent);
             }
         });
 
@@ -70,6 +69,8 @@ public class PinkNoisePlayer extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(PinkNoisePlayer.this, MainActivity.class);
+                startActivity(intent);
             }
         });
     }

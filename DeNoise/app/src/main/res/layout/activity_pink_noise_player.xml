@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".PinkNoisePlayer"
-    android:background="@drawable/waterfall"
+    android:background="@drawable/sunset"
     >
 
     <RelativeLayout
@@ -16,7 +16,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#80090E0E"/>
+        android:background="#80090E0E" />
 
     <RelativeLayout
         android:id="@+id/layout_topBar"
@@ -95,7 +95,7 @@
     <LinearLayout
         android:id="@+id/layout_cards"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="200dp"
         android:layout_above="@id/layout_playControls"
         android:layout_marginHorizontal="40dp"
         android:layout_marginBottom="30dp"
@@ -156,13 +156,13 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/sunset"
+                android:background="@drawable/waterfall"
                 >
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:background="@drawable/sunset_blur"
+                    android:background="@drawable/waterfall_blur"
                     android:layout_alignParentBottom="true"
                     >
 
@@ -180,7 +180,6 @@
                         android:textSize="14sp"
                         android:paddingBottom="10dp"/>
 
-
                 </RelativeLayout>
 
             </RelativeLayout>
@@ -197,13 +196,13 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/waterfall_blur"
+        android:background="@drawable/sunset_blur"
         >
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#86091E11"/>
+            android:background="#86190F13" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -301,9 +300,6 @@
 
         </LinearLayout>
 
-
     </RelativeLayout>
-
-
 
 </RelativeLayout>
