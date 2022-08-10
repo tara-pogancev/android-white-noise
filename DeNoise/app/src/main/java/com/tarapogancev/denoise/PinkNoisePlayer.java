@@ -2,6 +2,7 @@ package com.tarapogancev.denoise;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityOptionsCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -30,7 +31,9 @@ public class PinkNoisePlayer extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(PinkNoisePlayer.this, WhiteNoisePlayer.class);
-                startActivity(intent);
+                Bundle bundle = ActivityOptionsCompat.makeCustomAnimation(PinkNoisePlayer.this,
+                        android.R.anim.fade_in, android.R.anim.fade_out).toBundle();
+                startActivity(intent, bundle);
             }
         });
 
@@ -38,7 +41,9 @@ public class PinkNoisePlayer extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(PinkNoisePlayer.this, BrownNoisePlayer.class);
-                startActivity(intent);
+                Bundle bundle = ActivityOptionsCompat.makeCustomAnimation(PinkNoisePlayer.this,
+                        android.R.anim.fade_in, android.R.anim.fade_out).toBundle();
+                startActivity(intent, bundle);
             }
         });
 
@@ -70,7 +75,9 @@ public class PinkNoisePlayer extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(PinkNoisePlayer.this, MainActivity.class);
-                startActivity(intent);
+                Bundle bundle = ActivityOptionsCompat.makeCustomAnimation(PinkNoisePlayer.this,
+                        android.R.anim.fade_in, android.R.anim.fade_out).toBundle();
+                startActivity(intent, bundle);
             }
         });
     }
