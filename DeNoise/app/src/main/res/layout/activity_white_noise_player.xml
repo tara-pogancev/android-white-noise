@@ -4,46 +4,45 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".WhiteNoisePlayer"
     android:background="@drawable/ocean"
-    >
+    tools:context=".WhiteNoisePlayer">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:background="@drawable/black_gradient"/>
+        android:background="@drawable/black_gradient" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#80090E0E" />
+        android:background="#80090E0E">
+
+    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/layout_topBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="20dp"
-        android:layout_marginHorizontal="20dp">
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="20dp">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/button_timer"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            app:cardCornerRadius="20dp"
+            android:layout_alignParentEnd="true"
             android:backgroundTint="#80000000"
             android:elevation="5dp"
-            android:layout_alignParentEnd="true"
             android:foreground="@drawable/ripple"
-            >
+            app:cardCornerRadius="20dp">
 
             <ImageView
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:padding="5dp"
                 android:layout_gravity="center"
+                android:padding="5dp"
                 android:src="@drawable/timer"
-                app:tint="@color/white"
-                />
+                app:tint="@color/white" />
 
         </androidx.cardview.widget.CardView>
 
@@ -51,21 +50,20 @@
             android:id="@+id/button_back"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            app:cardCornerRadius="20dp"
+            android:layout_alignParentStart="true"
             android:backgroundTint="#80000000"
             android:elevation="5dp"
-            android:layout_alignParentStart="true"
             android:foreground="@drawable/ripple"
-            >
+            app:cardCornerRadius="20dp">
 
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:padding="5dp"
-                android:layout_marginEnd="3dp"
                 android:layout_gravity="center"
+                android:layout_marginEnd="3dp"
+                android:padding="5dp"
                 android:src="@drawable/back"
-                app:tint="@color/white"/>
+                app:tint="@color/white" />
 
         </androidx.cardview.widget.CardView>
 
@@ -99,36 +97,33 @@
         android:layout_above="@id/layout_playControls"
         android:layout_marginHorizontal="40dp"
         android:layout_marginBottom="30dp"
-        android:orientation="horizontal"
-        >
+        android:orientation="horizontal">
 
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card_pink"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.50"
             android:layout_marginEnd="10dp"
-            app:cardCornerRadius="20dp"
-            android:foreground="@drawable/ripple">
+            android:layout_weight="0.50"
+            android:foreground="@drawable/ripple"
+            app:cardCornerRadius="20dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/sunset"
-                >
+                android:background="@drawable/sunset">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:background="@drawable/sunset_blur"
                     android:layout_alignParentBottom="true"
-                    >
+                    android:background="@drawable/sunset_blur">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="#86000000"/>
+                        android:background="#86000000" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -151,28 +146,26 @@
             android:id="@+id/card_brown"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.50"
             android:layout_marginStart="10dp"
-            app:cardCornerRadius="20dp"
+            android:layout_weight="0.50"
             android:foreground="@drawable/ripple"
-            >
+            app:cardCornerRadius="20dp">
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/waterfall"
-                >
+                android:background="@drawable/waterfall">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:background="@drawable/waterfall_blur"
                     android:layout_alignParentBottom="true"
-                    >
+                    android:background="@drawable/waterfall_blur">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="#9C000000"/>
+                        android:background="#9C000000" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -198,8 +191,7 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/ocean_blur"
-        >
+        android:background="@drawable/ocean_blur">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -217,8 +209,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="White Noise"
                 android:fontFamily="@font/poppins_regular"
+                android:text="White Noise"
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -240,67 +232,68 @@
             android:paddingHorizontal="30dp">
 
             <androidx.cardview.widget.CardView
-                android:padding="3dp"
                 android:id="@+id/button_previous"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="20dp"
                 android:background="@color/teal"
-                android:foreground="@drawable/ripple"
                 android:backgroundTint="@android:color/transparent"
-                >
+                android:foreground="@drawable/ripple"
+                android:padding="3dp"
+                android:elevation="0dp"
+                app:cardCornerRadius="20dp"
+                android:outlineSpotShadowColor="@android:color/transparent">
+
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/previous"
-                    app:tint="@color/white"
                     android:padding="5dp"
-                    android:elevation="0dp"
-                    />
+                    android:src="@drawable/previous"
+                    app:tint="@color/white" />
+
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/button_playPause"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="20dp"
                 android:layout_marginHorizontal="5dp"
                 android:background="@color/teal"
-                android:foreground="@drawable/ripple"
-                android:elevation="0dp"
                 android:backgroundTint="@android:color/transparent"
-                >
+                android:elevation="0dp"
+                android:foreground="@drawable/ripple"
+                app:cardCornerRadius="20dp"
+                android:outlineSpotShadowColor="@android:color/transparent">
+
                 <ImageView
                     android:layout_width="45dp"
                     android:layout_height="45dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/pause_button"
-                    app:tint="@color/white"
                     android:padding="5dp"
-                    />
+                    android:src="@drawable/pause_button"
+                    app:tint="@color/white" />
             </androidx.cardview.widget.CardView>
 
 
             <androidx.cardview.widget.CardView
-                android:padding="3dp"
                 android:id="@+id/button_next"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="20dp"
                 android:background="@color/teal"
-                android:foreground="@drawable/ripple"
                 android:backgroundTint="@android:color/transparent"
-                >
+                android:foreground="@drawable/ripple"
+                android:padding="3dp"
+                android:elevation="0dp"
+                app:cardCornerRadius="20dp"
+                android:outlineSpotShadowColor="@android:color/transparent">
+
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/next"
-                    app:tint="@color/white"
                     android:padding="5dp"
-                    android:elevation="0dp"
-                    />
+                    android:src="@drawable/next"
+                    app:tint="@color/white" />
             </androidx.cardview.widget.CardView>
 
         </LinearLayout>

@@ -101,55 +101,14 @@
         android:layout_marginBottom="30dp"
         android:orientation="horizontal"
         >
-        <androidx.cardview.widget.CardView
-            android:id="@+id/card_white"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.50"
-            android:layout_marginEnd="10dp"
-            app:cardCornerRadius="20dp"
-            android:foreground="@drawable/ripple"
-            >
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/ocean"
-                >
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:background="@drawable/ocean_blur"
-                    android:layout_alignParentBottom="true"
-                    >
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="#9C000000"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:text="White Noise"
-                        android:textColor="#D1D1D1"
-                        android:textSize="14sp"
-                        android:paddingBottom="10dp"/>
-
-
-                </RelativeLayout>
-
-            </RelativeLayout>
-
-        </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card_brown"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.50"
-            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             app:cardCornerRadius="20dp"
             android:foreground="@drawable/ripple">
 
@@ -184,6 +143,49 @@
 
             </RelativeLayout>
 
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_white"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.50"
+            android:layout_marginStart="10dp"
+            app:cardCornerRadius="20dp"
+            android:foreground="@drawable/ripple"
+            >
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/ocean"
+                >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/ocean_blur"
+                    android:layout_alignParentBottom="true"
+                    >
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#9C000000"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="White Noise"
+                        android:textColor="#D1D1D1"
+                        android:textSize="14sp"
+                        android:paddingBottom="10dp"/>
+
+
+                </RelativeLayout>
+
+            </RelativeLayout>
 
         </androidx.cardview.widget.CardView>
 
@@ -246,6 +248,7 @@
                 android:background="@color/teal"
                 android:foreground="@drawable/ripple"
                 android:backgroundTint="@android:color/transparent"
+                android:outlineSpotShadowColor="@android:color/transparent"
                 >
             <ImageView
                 android:layout_width="30dp"
@@ -266,6 +269,7 @@
                 android:background="@color/teal"
                 android:foreground="@drawable/ripple"
                 android:backgroundTint="@android:color/transparent"
+                android:outlineSpotShadowColor="@android:color/transparent"
                 >
                 <ImageView
                     android:layout_width="45dp"
@@ -287,6 +291,7 @@
                 android:background="@color/teal"
                 android:foreground="@drawable/ripple"
                 android:backgroundTint="@android:color/transparent"
+                android:outlineSpotShadowColor="@android:color/transparent"
                 >
                 <ImageView
                     android:layout_width="30dp"

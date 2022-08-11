@@ -16,4 +16,8 @@
         <item name="android:fontFamily">@font/open_sans</item>
         <item name="fontWeight">100</item>
     </style>
+
+    <style name="TitleFont" parent="Widget.AppCompat.TextView">
+        <item name="fontFamily">@font/arima</item>
+    </style>
 </resources>
