@@ -36,6 +36,7 @@ public class Onboarding extends AppCompatActivity {
                     sliderViewPager.setCurrentItem(getItem(1), true);
                 } else {
                     Intent intent = new Intent(Onboarding.this, MainActivity.class);
+                    finish();
                     startActivity(intent);
                 }
             }
