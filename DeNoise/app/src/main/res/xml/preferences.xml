@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:key="main"
+        android:title="Main Settings">
+
+        <EditTextPreference
+            android:key="userName"
+            android:title="Your Name"
+            android:summary="Enter your name for greetings purpose. This is optional."
+            android:defaultValue=""
+            />
+    </PreferenceCategory>
+
+</PreferenceScreen>

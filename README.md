@@ -5,3 +5,4 @@ DeNoise - White Noise Application for relaxation, studying or sleeping, made in 
 ## Resources
 https://www.flaticon.com/packs/music-224?word=music%20player
 https://unsplash.com/
+https://themeisle.com/illustrations/
