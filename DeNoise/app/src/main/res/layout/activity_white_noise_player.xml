@@ -266,6 +266,7 @@
                 android:outlineSpotShadowColor="@android:color/transparent">
 
                 <ImageView
+                    android:id="@+id/img_playPause"
                     android:layout_width="45dp"
                     android:layout_height="45dp"
                     android:layout_gravity="center"
