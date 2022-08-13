@@ -21,7 +21,7 @@ import java.util.Set;
 public class MainActivity extends AppCompatActivity {
 
     CardView settingsButton, whiteNoiseButton, pinkNoiseButton, brownNoiseButton, nextButton, previousButton, playPauseButton;
-    TextView greetingText, activeSoundText;
+    TextView activeSoundText, greetingText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
             SharedPreferences.Editor editor = preferences.edit();
             editor.putBoolean("firstRun", false).apply();
             Intent intent = new Intent(this, Onboarding.class);
+            finish();
             startActivity(intent);
         }
 
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, Settings.class);
+                finish();
                 startActivity(intent);
             }
         });
@@ -102,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
         setupGreetinsMessage();
     }
 
-    private void setupGreetinsMessage() {
+    public void setupGreetinsMessage() {
         Date currentTime = Calendar.getInstance().getTime();
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         String name = preferences.getString("userName", "");
@@ -119,7 +121,9 @@ public class MainActivity extends AppCompatActivity {
             greeting = ("Good Night") + name;
         } else if (d <= 1100) {
             greeting = ("Good Morning") + name;
-        } else if (d <= 1500) {
+        } else if (d <= 1600) {
+            greeting = ("Good Day") + name;
+        } else if (d <= 2000) {
             greeting = ("Good Afternoon") + name;
         } else {
             greeting = ("Good Evening") + name;
