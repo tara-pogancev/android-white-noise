@@ -31,6 +31,7 @@ public class PinkNoisePlayer extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(PinkNoisePlayer.this, WhiteNoisePlayer.class);
+                finish();
                 Bundle bundle = ActivityOptionsCompat.makeCustomAnimation(PinkNoisePlayer.this,
                         android.R.anim.fade_in, android.R.anim.fade_out).toBundle();
                 startActivity(intent, bundle);
@@ -41,6 +42,7 @@ public class PinkNoisePlayer extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(PinkNoisePlayer.this, BrownNoisePlayer.class);
+                finish();
                 Bundle bundle = ActivityOptionsCompat.makeCustomAnimation(PinkNoisePlayer.this,
                         android.R.anim.fade_in, android.R.anim.fade_out).toBundle();
                 startActivity(intent, bundle);
