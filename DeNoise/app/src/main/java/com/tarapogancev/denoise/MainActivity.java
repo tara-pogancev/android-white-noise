@@ -1,7 +1,7 @@
 package com.tarapogancev.denoise;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        refreshTheme();
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         if (preferences.getBoolean("firstRun", false)) {
@@ -57,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, Settings.class);
-                finish();
                 startActivity(intent);
             }
         });
@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        setupGreetinsMessage();
+        setupGreetingsMessage();
         refreshPlayPauseButton();
         refreshCurrentSoundText();
     }
@@ -157,7 +157,17 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void setupGreetinsMessage() {
+    private void refreshTheme() {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        Boolean darkTheme = preferences.getBoolean("darkMode", false);
+        if (darkTheme) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
+    }
+
+    public void setupGreetingsMessage() {
         Date currentTime = Calendar.getInstance().getTime();
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         String name = preferences.getString("userName", "");
@@ -183,13 +193,16 @@ public class MainActivity extends AppCompatActivity {
         }
 
         greetingText.setText(greeting);
+        greetingText.setSelected(true);
 
     }
 
     @Override
     protected void onResume() {
-        super.onResume();
         refreshPlayPauseButton();
         refreshCurrentSoundText();
+        setupGreetingsMessage();
+        refreshTheme();
+        super.onResume();
     }
 }

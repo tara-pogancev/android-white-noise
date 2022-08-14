@@ -7,9 +7,20 @@
         <EditTextPreference
             android:key="userName"
             android:title="Your Name"
-            android:summary="Enter your name for greetings purpose. This is optional."
+            android:summary="Enter your name for the customized greetings message. This is optional."
             android:defaultValue=""
             />
+
+        <CheckBoxPreference
+            android:key="darkMode"
+            android:title="Dark Mode"
+            android:defaultValue="false"
+            android:summaryOn="Dark Mode is activated."
+            android:summaryOff="Dark Mode is not activated."
+            />
+
+        
+
     </PreferenceCategory>
 
 </PreferenceScreen>

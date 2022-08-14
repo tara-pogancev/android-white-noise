@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="@color/lightGray">
+    android:background="?attr/colorOnPrimary">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -114,53 +114,53 @@
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingTop="20dp"
-                android:layout_below="@id/layout_mainHeader">
+                android:layout_below="@id/layout_mainHeader"
+                android:paddingTop="20dp">
 
                 <TextView
                     android:id="@+id/text_noiseTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:singleLine="true"
-                    android:marqueeRepeatLimit="marquee_forever"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginBottom="15dp"
                     android:ellipsize="marquee"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:singleLine="true"
                     android:text="Relaxing White Noise"
-                    android:layout_margin="15dp"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"/>
+                    android:textColor="?attr/colorOnSecondary"
+                    android:textSize="20sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/text_noiseTitle"
-                    android:orientation="vertical"
-                    android:layout_marginHorizontal="20dp">
+                    android:layout_marginHorizontal="20dp"
+                    android:orientation="vertical">
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/card_white"
                         android:layout_width="match_parent"
                         android:layout_height="100dp"
-                        app:cardCornerRadius="20dp"
                         android:layout_marginBottom="10dp"
                         android:foreground="@drawable/ripple"
-                        >
+                        app:cardCornerRadius="20dp">
 
                         <RelativeLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            >
+                            android:layout_height="match_parent">
 
                             <ImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:src="@drawable/ocean"
                                 android:scaleType="centerCrop"
-                                />
+                                android:src="@drawable/ocean" />
 
                             <RelativeLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:background="#7A000000"/>
+                                android:background="#7A000000" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -180,26 +180,23 @@
                         android:layout_width="match_parent"
                         android:layout_height="100dp"
                         android:layout_marginBottom="10dp"
-                        app:cardCornerRadius="20dp"
                         android:foreground="@drawable/ripple"
-                        >
+                        app:cardCornerRadius="20dp">
 
                         <RelativeLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            >
+                            android:layout_height="match_parent">
 
                             <ImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:src="@drawable/sunset"
                                 android:scaleType="centerCrop"
-                                />
+                                android:src="@drawable/sunset" />
 
                             <RelativeLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:background="#7A000000"/>
+                                android:background="#7A000000" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -218,21 +215,18 @@
                         android:id="@+id/card_brown"
                         android:layout_width="match_parent"
                         android:layout_height="100dp"
-                        app:cardCornerRadius="20dp"
                         android:foreground="@drawable/ripple"
-                        >
+                        app:cardCornerRadius="20dp">
 
                         <RelativeLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            >
+                            android:layout_height="match_parent">
 
                             <ImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:src="@drawable/waterfall"
                                 android:scaleType="centerCrop"
-                                />
+                                android:src="@drawable/waterfall" />
 
                             <RelativeLayout
                                 android:layout_width="match_parent"
@@ -266,7 +260,8 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_alignParentBottom="true"
-        android:background="@color/white">
+        android:layout_marginBottom="-1dp"
+        android:background="?attr/colorOnPrimaryContainer">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -282,7 +277,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_regular"
                 android:text="Brown Noise"
-                android:textColor="@color/black"
+                android:textColor="?attr/colorOnSecondary"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -290,7 +285,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Currently Playing"
-                android:textColor="#353535" />
+                android:textColor="?attr/colorOnBackground" />
 
         </LinearLayout>
 
@@ -319,7 +314,7 @@
                     android:layout_gravity="center"
                     android:padding="5dp"
                     android:src="@drawable/previous"
-                    app:tint="@color/black" />
+                    app:tint="?attr/colorOnSecondary" />
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
@@ -340,7 +335,7 @@
                     android:layout_gravity="center"
                     android:padding="5dp"
                     android:src="@drawable/pause_button"
-                    app:tint="@color/black" />
+                    app:tint="?attr/colorOnSecondary" />
             </androidx.cardview.widget.CardView>
 
 
@@ -361,13 +356,12 @@
                     android:layout_gravity="center"
                     android:padding="5dp"
                     android:src="@drawable/next"
-                    app:tint="@color/black" />
+                    app:tint="?attr/colorOnSecondary" />
             </androidx.cardview.widget.CardView>
 
         </LinearLayout>
 
     </RelativeLayout>
-
 
 
 </RelativeLayout>

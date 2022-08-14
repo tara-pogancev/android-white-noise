@@ -8,6 +8,7 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatDelegate;
 
 public class SettingsFragment extends PreferenceFragment {
 
@@ -16,12 +17,31 @@ public class SettingsFragment extends PreferenceFragment {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences);
 
-        EditTextPreference userNamePreference = (EditTextPreference) findPreference("userName");
-        userNamePreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+        loadSettings();
+    }
+
+    private void loadSettings() {
+        CheckBoxPreference darkModePreference = (CheckBoxPreference) findPreference("darkMode");
+
+        if (darkModePreference.isChecked()) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
+
+        darkModePreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object o) {
+                if ((Boolean) o) {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                } else {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                }
                 return true;
             }
         });
+
+
     }
+
 }
