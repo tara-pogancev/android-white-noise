@@ -10,7 +10,8 @@ public class MediaPlayerService {
 
     public static MediaPlayerService instance;
     int currentSong = 0;
-    MediaPlayer player;
+    MediaPlayer player, playerNext;
+    Context mContext;
 
     String[] songNames = {
             "White Noise",
@@ -33,9 +34,31 @@ public class MediaPlayerService {
 
     public void play(Context context) {
         player = MediaPlayer.create(context, songs[currentSong]);
-        player.setLooping(true);
-        player.start();
+        player.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mediaPlayer) {
+                player.start();
+            }
+        });
+
+        createNextMediaPlayer(context);
     }
+
+    private void createNextMediaPlayer(Context context) {
+        playerNext = MediaPlayer.create(context, songs[currentSong]);
+        player.setNextMediaPlayer(playerNext);
+        mContext = context;
+        player.setOnCompletionListener(onCompletionListener);
+    }
+
+    private MediaPlayer.OnCompletionListener onCompletionListener = new MediaPlayer.OnCompletionListener() {
+        @Override
+        public void onCompletion(MediaPlayer mediaPlayer) {
+            mediaPlayer.release();
+            player = playerNext;
+            createNextMediaPlayer(mContext);
+        }
+    };
 
     public void pause() {
         if (isPlaying()) {
