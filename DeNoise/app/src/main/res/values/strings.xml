@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">DeNoise - Calming White Noise</string>
+
+    <string-array name="pref_defaultSound">
+        <item>White Noise</item>
+        <item>Pink Noise</item>
+        <item>Brown Noise</item>
+    </string-array>
 </resources>

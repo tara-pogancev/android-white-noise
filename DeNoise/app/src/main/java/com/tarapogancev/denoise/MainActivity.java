@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         refreshTheme();
+        setDefaultSound();
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         if (preferences.getBoolean("firstRun", false)) {
@@ -128,6 +129,18 @@ public class MainActivity extends AppCompatActivity {
         setupGreetingsMessage();
         refreshPlayPauseButton();
         refreshCurrentSoundText();
+    }
+
+    private void setDefaultSound() {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String defaultSound = preferences.getString("defaultSound", "White Noise");
+        if (defaultSound.equals("White Noise")) {
+            mediaPlayerService.setSong(0);
+        } else if (defaultSound.equals("Pink Noise")) {
+            mediaPlayerService.setSong(1);
+        } else {
+            mediaPlayerService.setSong(2);
+        }
     }
 
     private void redirectWhiteNoise() {

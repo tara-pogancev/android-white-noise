@@ -19,7 +19,15 @@
             android:summaryOff="Dark Mode is not activated."
             />
 
-        
+        <ListPreference
+            android:key="defaultSound"
+            android:title="Default Sound"
+            android:summary="The default sound which will be selected upon opening the application."
+            android:dialogTitle="Select default sound"
+            android:entries="@array/pref_defaultSound"
+            android:entryValues="@array/pref_defaultSound"
+            android:defaultValue="White Noise"
+            />
 
     </PreferenceCategory>
 
