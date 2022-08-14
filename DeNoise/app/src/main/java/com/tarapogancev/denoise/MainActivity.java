@@ -1,5 +1,6 @@
 package com.tarapogancev.denoise;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
@@ -8,20 +9,23 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
+import com.tarapogancev.denoise.service.MediaPlayerService;
+
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Properties;
-import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
 
     CardView settingsButton, whiteNoiseButton, pinkNoiseButton, brownNoiseButton, nextButton, previousButton, playPauseButton;
     TextView activeSoundText, greetingText;
+    ImageView playPauseImage;
+    RelativeLayout playControls;
+    MediaPlayerService mediaPlayerService = MediaPlayerService.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
         playPauseButton = findViewById(R.id.button_playPause);
         greetingText = findViewById(R.id.text_greeting);
         activeSoundText = findViewById(R.id.text_activeText);
+        playPauseImage = findViewById(R.id.img_playPause);
+        playControls = findViewById(R.id.layout_playControls);
 
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,49 +65,96 @@ public class MainActivity extends AppCompatActivity {
         whiteNoiseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, WhiteNoisePlayer.class);
-                startActivity(intent);
+                redirectWhiteNoise();
             }
         });
 
         pinkNoiseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, PinkNoisePlayer.class);
-                startActivity(intent);
+                redirectPinkNoise();
             }
         });
 
         brownNoiseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, BrownNoisePlayer.class);
-                startActivity(intent);
+                redirectBrownNoise();
             }
         });
 
         playPauseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if (mediaPlayerService.isPlaying()) {
+                    mediaPlayerService.pause();
+                    playPauseImage.setImageResource(R.drawable.play_button);
+                } else {
+                    mediaPlayerService.play(MainActivity.this);
+                    playPauseImage.setImageResource(R.drawable.pause_button);
+                }
             }
         });
 
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                mediaPlayerService.next(MainActivity.this);
+                refreshCurrentSoundText();
             }
         });
 
         previousButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mediaPlayerService.previous(MainActivity.this);
+                refreshCurrentSoundText();
+            }
+        });
 
+        playControls.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mediaPlayerService.getCurrentSongName() == "White Noise") {
+                    redirectWhiteNoise();
+                } else if (mediaPlayerService.getCurrentSongName() == "Pink Noise")  {
+                    redirectPinkNoise();
+                } else {
+                    redirectBrownNoise();
+                }
             }
         });
 
         setupGreetinsMessage();
+        refreshPlayPauseButton();
+        refreshCurrentSoundText();
+    }
+
+    private void redirectWhiteNoise() {
+        Intent intent = new Intent(MainActivity.this, WhiteNoisePlayer.class);
+        startActivity(intent);
+    }
+
+    private void redirectPinkNoise() {
+        Intent intent = new Intent(MainActivity.this, PinkNoisePlayer.class);
+        startActivity(intent);
+    }
+
+    private void redirectBrownNoise() {
+        Intent intent = new Intent(MainActivity.this, BrownNoisePlayer.class);
+        startActivity(intent);
+    }
+
+    private void refreshCurrentSoundText() {
+        activeSoundText.setText(mediaPlayerService.getCurrentSongName());
+    }
+
+    private void refreshPlayPauseButton() {
+        if (mediaPlayerService.isPlaying()) {
+            playPauseImage.setImageResource(R.drawable.pause_button);
+        } else {
+            playPauseImage.setImageResource(R.drawable.play_button);
+        }
     }
 
     public void setupGreetinsMessage() {
@@ -131,5 +184,12 @@ public class MainActivity extends AppCompatActivity {
 
         greetingText.setText(greeting);
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        refreshPlayPauseButton();
+        refreshCurrentSoundText();
     }
 }
