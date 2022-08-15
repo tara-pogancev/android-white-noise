@@ -70,6 +70,7 @@
     </RelativeLayout>
 
     <TextView
+        android:id="@+id/text_noiseTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/layout_topBar"
@@ -78,6 +79,19 @@
         android:text="White Noise"
         android:textColor="#FFFFFF"
         android:textSize="35sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/text_timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_noiseTitle"
+        style="@style/TitleFont"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/poppins_regular"
+        android:text="00:00"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp"
         android:textStyle="bold" />
 
     <TextView

@@ -3,13 +3,18 @@ package com.tarapogancev.denoise;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityOptionsCompat;
+import androidx.fragment.app.DialogFragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.tarapogancev.denoise.service.MediaPlayerService;
+import com.tarapogancev.denoise.service.TimerPickerDialog;
+import com.tarapogancev.denoise.service.TimerService;
 
 import java.util.Objects;
 
@@ -18,6 +23,8 @@ public class WhiteNoisePlayer extends AppCompatActivity {
     CardView backButton, timerButton, pinkNoiseButton, brownNoiseButton, nextButton, previousButton, playPauseButton;
     ImageView playPauseImage;
     MediaPlayerService mediaPlayerService = MediaPlayerService.getInstance();
+    TextView timerText;
+    TimerService timerService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +39,7 @@ public class WhiteNoisePlayer extends AppCompatActivity {
         previousButton = findViewById(R.id.button_previous);
         playPauseButton = findViewById(R.id.button_playPause);
         playPauseImage = findViewById(R.id.img_playPause);
+        timerText = findViewById(R.id.text_timer);
 
         if (!mediaPlayerService.isPlaying() || !Objects.equals(mediaPlayerService.getCurrentSongName(), "White Noise")) {
             mediaPlayerService.close();
@@ -83,9 +91,12 @@ public class WhiteNoisePlayer extends AppCompatActivity {
             }
         });
 
+        Intent timerIntent = new Intent(this, TimerService.class);
+        startService(timerIntent);
         timerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                TimerService.getInstance().startTimer();
             }
         });
 
@@ -120,4 +131,12 @@ public class WhiteNoisePlayer extends AppCompatActivity {
                 android.R.anim.fade_in, android.R.anim.fade_out).toBundle();
         startActivity(intent, bundle);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Intent timerIntent = new Intent(this, TimerService.class);
+        startService(timerIntent);
+    }
+
 }

@@ -3,7 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.tarapogancev.denoise">
 
+    <permission android:name="android.permission.MEDIA_CONTENT_CONTROL" />
+
     <application
+        android:name=".service.App"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -37,6 +40,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service android:name=".service.TimerService"/>
+        <service android:name=".service.MediaPlayerService"/>
     </application>
 
 </manifest>
