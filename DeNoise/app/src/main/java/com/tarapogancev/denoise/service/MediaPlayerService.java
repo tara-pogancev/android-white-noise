@@ -1,11 +1,12 @@
 package com.tarapogancev.denoise.service;
 
+import static com.tarapogancev.denoise.service.App.CHANNEL_ID;
+
 import android.app.Notification;
-import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.IBinder;
 
@@ -130,6 +131,34 @@ public class MediaPlayerService extends Service {
 
     public Boolean isPlaying() {
         return player != null && player.isPlaying();
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        String title = intent.getStringExtra("inputExtra");
+
+        Intent notificationIntent = new Intent(this, MainActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_MUTABLE);
+
+        Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
+                .setContentTitle("DeNoise is currently running.")
+                .setContentText("Tap to revisit the application.")
+                .setSmallIcon(R.drawable.logo)
+                .setContentIntent(pendingIntent)
+                .build();
+
+        startForeground(1, notification);
+        return START_NOT_STICKY;
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 
     @Nullable

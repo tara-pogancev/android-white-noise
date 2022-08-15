@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.cardview.widget.CardView;
 
+import android.app.Notification;
+import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
@@ -93,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
                     mediaPlayerService.pause();
                     playPauseImage.setImageResource(R.drawable.play_button);
                 } else {
+                    startService();
                     mediaPlayerService.play(MainActivity.this);
                     playPauseImage.setImageResource(R.drawable.pause_button);
                 }
@@ -219,6 +222,16 @@ public class MainActivity extends AppCompatActivity {
         greetingText.setText(greeting);
         greetingText.setSelected(true);
 
+    }
+
+    public void startService() {
+        Intent serviceIntent = new Intent(this, MediaPlayerService.class);
+        startService(serviceIntent);
+    }
+
+    public void stopService() {
+        Intent serviceIntent = new Intent(this, MediaPlayerService.class);
+        stopService(serviceIntent);
     }
 
     @Override

@@ -3,20 +3,20 @@ package com.tarapogancev.denoise;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityOptionsCompat;
-import androidx.fragment.app.DialogFragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.tarapogancev.denoise.service.MediaPlayerService;
-import com.tarapogancev.denoise.service.TimerPickerDialog;
 import com.tarapogancev.denoise.service.TimerService;
 
 import java.util.Objects;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class WhiteNoisePlayer extends AppCompatActivity {
 
@@ -97,12 +97,13 @@ public class WhiteNoisePlayer extends AppCompatActivity {
             }
         });
 
-        Intent timerIntent = new Intent(this, TimerService.class);
-        startService(timerIntent);
+        setupTimerText();
         timerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 TimerService.getInstance().startTimer();
+                timerText.setVisibility(View.VISIBLE);
+                startTrackingTimer();
             }
         });
 
@@ -112,6 +113,40 @@ public class WhiteNoisePlayer extends AppCompatActivity {
                 redirectMainActivity();
             }
         });
+    }
+
+    private void startTrackingTimer() {
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                setupTimerText();
+                Toast.makeText(WhiteNoisePlayer.this, "12", Toast.LENGTH_SHORT).show();
+            }
+        }, 0, 1000);
+    }
+
+    private void setupTimerText() {
+        if (!TimerService.getInstance().isTimerRunning()) {
+            playPauseImage.setImageResource(R.drawable.play_button);
+            timerText.setVisibility(View.INVISIBLE);
+        } else {
+            long timeInMillis = TimerService.getInstance().getMillisRemaining();
+            String text = "";
+            /*
+            long hours = timeInMillis / 3600000;
+            long minutes = timeInMillis % 60000 / 60000;
+            long seconds = timeInMillis % 60000 / 1000;
+            if (hours != 0) {
+                text = hours + ":" + minutes + ":" + seconds;
+            } else if (minutes != 0) {
+                text = minutes + ":" + seconds;
+            } else {
+                text = seconds + "";
+            }*/
+
+            timerText.setText(timeInMillis + "");
+        }
     }
 
     private void redirectPinkNoise() {
@@ -136,13 +171,6 @@ public class WhiteNoisePlayer extends AppCompatActivity {
         Bundle bundle = ActivityOptionsCompat.makeCustomAnimation(WhiteNoisePlayer.this,
                 android.R.anim.fade_in, android.R.anim.fade_out).toBundle();
         startActivity(intent, bundle);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Intent timerIntent = new Intent(this, TimerService.class);
-        startService(timerIntent);
     }
 
 }

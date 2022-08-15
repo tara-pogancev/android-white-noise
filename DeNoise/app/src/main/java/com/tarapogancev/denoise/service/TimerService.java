@@ -4,8 +4,6 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.CountDownTimer;
 import android.os.IBinder;
-import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -17,7 +15,6 @@ public class TimerService extends Service {
     private CountDownTimer countDownTimer;
     private Boolean timerRunning = false;
     private long timeLeftInMillis = startTimeInMillis;
-
 
     public static TimerService getInstance() {
         if (instance == null) {
@@ -48,6 +45,7 @@ public class TimerService extends Service {
                 stopSounds();
             }
         }.start();
+
     }
 
     private void stopSounds() {
@@ -60,6 +58,10 @@ public class TimerService extends Service {
             timerThread.destroy();
         }
         stopSelf();
+    }
+
+    public long getMillisRemaining() {
+        return timeLeftInMillis;
     }
 
 
