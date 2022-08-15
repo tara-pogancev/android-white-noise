@@ -7,6 +7,9 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.IBinder;
 
@@ -140,15 +143,22 @@ public class MediaPlayerService extends Service {
         Intent notificationIntent = new Intent(this, MainActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_MUTABLE);
 
+        Bitmap picture = BitmapFactory.decodeResource(getResources(), R.drawable.waterfall);
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setContentTitle("DeNoise is currently running.")
                 .setContentText("Tap to revisit the application.")
                 .setSmallIcon(R.drawable.logo)
+                .setLargeIcon(picture)
                 .setContentIntent(pendingIntent)
+                .addAction(R.drawable.ic_baseline_skip_previous_24, "Previous", null)
+                .addAction(R.drawable.ic_baseline_pause_24, "Play/Pause", null)
+                .addAction(R.drawable.ic_baseline_skip_next_24, "Next", null)
+                .addAction(R.drawable.ic_baseline_cancel_24, "Close", null)
+                .setStyle(new androidx.media.app.NotificationCompat.MediaStyle().setShowActionsInCompactView(1, 3))
                 .build();
 
         startForeground(1, notification);
-        return START_NOT_STICKY;
+        return START_STICKY;
     }
 
     @Override
@@ -159,6 +169,7 @@ public class MediaPlayerService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        close();
     }
 
     @Nullable
