@@ -33,13 +33,19 @@ public class BrownNoisePlayer extends AppCompatActivity {
         playPauseButton = findViewById(R.id.button_playPause);
         playPauseImage = findViewById(R.id.img_playPause);
 
-        if (!mediaPlayerService.isPlaying() || !Objects.equals(mediaPlayerService.getCurrentSongName(), "Brown Noise")) {
+        if (!mediaPlayerService.isPlaying() && !Objects.equals(mediaPlayerService.getCurrentSongName(), "Brown Noise")) {
+            mediaPlayerService.close();
+            mediaPlayerService.setSong(2);
+            playPauseImage.setImageResource(R.drawable.play_button);
+        } else if (!mediaPlayerService.isPlaying() && Objects.equals(mediaPlayerService.getCurrentSongName(), "Brown Noise")) {
+            playPauseImage.setImageResource(R.drawable.play_button);
+        } else if (mediaPlayerService.isPlaying() && !Objects.equals(mediaPlayerService.getCurrentSongName(), "Brown Noise")) {
             mediaPlayerService.close();
             mediaPlayerService.setSong(2);
             mediaPlayerService.play(this);
             playPauseImage.setImageResource(R.drawable.pause_button);
         } else {
-            playPauseImage.setImageResource(R.drawable.play_button);
+            playPauseImage.setImageResource(R.drawable.pause_button);
         }
 
         whiteNoiseButton.setOnClickListener(new View.OnClickListener() {

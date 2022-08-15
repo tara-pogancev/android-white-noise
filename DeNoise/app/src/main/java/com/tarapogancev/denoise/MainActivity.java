@@ -146,16 +146,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void redirectWhiteNoise() {
+        mediaPlayerService.close();
+        mediaPlayerService.setSong(0);
+        mediaPlayerService.play(this);
         Intent intent = new Intent(MainActivity.this, WhiteNoisePlayer.class);
         startActivity(intent);
     }
 
     private void redirectPinkNoise() {
+        mediaPlayerService.close();
+        mediaPlayerService.setSong(1);
+        mediaPlayerService.play(this);
         Intent intent = new Intent(MainActivity.this, PinkNoisePlayer.class);
         startActivity(intent);
     }
 
     private void redirectBrownNoise() {
+        mediaPlayerService.close();
+        mediaPlayerService.setSong(2);
+        mediaPlayerService.play(this);
         Intent intent = new Intent(MainActivity.this, BrownNoisePlayer.class);
         startActivity(intent);
     }

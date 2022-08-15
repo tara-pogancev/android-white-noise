@@ -41,13 +41,19 @@ public class WhiteNoisePlayer extends AppCompatActivity {
         playPauseImage = findViewById(R.id.img_playPause);
         timerText = findViewById(R.id.text_timer);
 
-        if (!mediaPlayerService.isPlaying() || !Objects.equals(mediaPlayerService.getCurrentSongName(), "White Noise")) {
+        if (!mediaPlayerService.isPlaying() && !Objects.equals(mediaPlayerService.getCurrentSongName(), "White Noise")) {
+            mediaPlayerService.close();
+            mediaPlayerService.setSong(0);
+            playPauseImage.setImageResource(R.drawable.play_button);
+        } else if (!mediaPlayerService.isPlaying() && Objects.equals(mediaPlayerService.getCurrentSongName(), "White Noise")) {
+            playPauseImage.setImageResource(R.drawable.play_button);
+        } else if (mediaPlayerService.isPlaying() && !Objects.equals(mediaPlayerService.getCurrentSongName(), "White Noise")) {
             mediaPlayerService.close();
             mediaPlayerService.setSong(0);
             mediaPlayerService.play(this);
             playPauseImage.setImageResource(R.drawable.pause_button);
         } else {
-            playPauseImage.setImageResource(R.drawable.play_button);
+            playPauseImage.setImageResource(R.drawable.pause_button);
         }
 
         pinkNoiseButton.setOnClickListener(new View.OnClickListener() {
