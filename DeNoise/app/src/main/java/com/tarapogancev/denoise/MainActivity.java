@@ -222,6 +222,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void startService() {
         Intent serviceIntent = new Intent(this, MediaPlayerService.class);
+        serviceIntent.putExtra("soundName", activeSoundText.getText());
+        serviceIntent.putExtra("playingState", true);
         ContextCompat.startForegroundService(this, serviceIntent);
     }
 

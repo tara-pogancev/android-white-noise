@@ -10,11 +10,9 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
-import android.os.Build;
 import android.os.IBinder;
 
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
@@ -80,14 +78,12 @@ public class MediaPlayerService extends Service {
     public void pause() {
         if (isPlaying()) {
             player.pause();
-            // startForeground(1, getNotification(getCurrentSoundName(), isPlaying()));
         }
     }
 
     public void resume() {
         if (!isPlaying()) {
             player.start();
-            // startForeground(1, getNotification(getCurrentSoundName(), isPlaying()));
         }
     }
 
@@ -100,7 +96,8 @@ public class MediaPlayerService extends Service {
 
     public void stopService() {
         close();
-        stopSelf();
+        stopForeground(true);
+        //stopSelf();
     }
 
     public void next(Context context) {
@@ -111,7 +108,6 @@ public class MediaPlayerService extends Service {
             currentSong = 0;
         }
         setSong(currentSong);
-        // startForeground(1, getNotification(getCurrentSoundName(), wasPlaying));
         if (wasPlaying) {
             play(context);
         }
@@ -125,7 +121,7 @@ public class MediaPlayerService extends Service {
             currentSong = 2;
         }
         setSong(currentSong);
-        // startForeground(1, getNotification(getCurrentSoundName(), wasPlaying));
+        startForeground(1, getNotification(getCurrentSoundName(), wasPlaying));
         if (wasPlaying) {
             play(context);
         }
@@ -133,7 +129,6 @@ public class MediaPlayerService extends Service {
 
     public void setSong(int i) {
         currentSong = i;
-        // startForeground(1, getNotification(getCurrentSoundName(), isPlaying()));
     }
 
     public String getCurrentSoundName() {
@@ -146,7 +141,9 @@ public class MediaPlayerService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        startForeground(1, getNotification(getCurrentSoundName(), getInstance().isPlaying()));
+        String soundName = intent.getStringExtra("soundName");
+        Boolean playingState = intent.getBooleanExtra("playingState", true);
+        startForeground(1, getNotification(soundName, playingState));
         return START_STICKY;
     }
 
@@ -170,6 +167,8 @@ public class MediaPlayerService extends Service {
     public Notification getNotification(String sound, Boolean isPlaying) {
 
         Intent notificationIntent = new Intent(this, MainActivity.class);
+        notificationIntent.setAction(Intent.ACTION_MAIN);
+        notificationIntent.addCategory(Intent.CATEGORY_LAUNCHER);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_IMMUTABLE);
 
         Intent broadcastIntent1 = new Intent(this, NotificationReceiver.class).setAction("PREVIOUS");
