@@ -9,11 +9,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.IBinder;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
@@ -58,21 +59,6 @@ public class MediaPlayerService extends Service {
         });
 
         createNextMediaPlayer(context);
-
-//        notificationManagerCompat = NotificationManagerCompat.from(context);
-//        Notification channel = new NotificationCompat.Builder(context.getApplicationContext(), App.CHANNEL_ID_1)
-//                .setSmallIcon(R.drawable.logo)
-//                .setContentTitle("Currently Playing: " + getCurrentSongName())
-//                .setContentText("Return to DeNoise")
-//                .setAutoCancel(true)
-//                .setPriority(NotificationCompat.PRIORITY_HIGH)
-//                //.addAction(R.drawable.previous, "previous", null)
-//                //.addAction(R.drawable.pause_button, "playPause", null)
-//                //.addAction(R.drawable.next, "next", null)
-//                //.setStyle(new androidx.media.app.NotificationCompat.MediaStyle().setShowActionsInCompactView(1, 2, 3))
-//                .build();
-//
-//        notificationManagerCompat.notify(1, channel);
     }
 
     private void createNextMediaPlayer(Context context) {
@@ -94,6 +80,14 @@ public class MediaPlayerService extends Service {
     public void pause() {
         if (isPlaying()) {
             player.pause();
+            // startForeground(1, getNotification(getCurrentSoundName(), isPlaying()));
+        }
+    }
+
+    public void resume() {
+        if (!isPlaying()) {
+            player.start();
+            // startForeground(1, getNotification(getCurrentSoundName(), isPlaying()));
         }
     }
 
@@ -104,31 +98,45 @@ public class MediaPlayerService extends Service {
         }
     }
 
+    public void stopService() {
+        close();
+        stopSelf();
+    }
+
     public void next(Context context) {
+        Boolean wasPlaying = isPlaying();
         close();
         currentSong++;
         if (currentSong == 3) {
             currentSong = 0;
         }
         setSong(currentSong);
-        play(context);
+        // startForeground(1, getNotification(getCurrentSoundName(), wasPlaying));
+        if (wasPlaying) {
+            play(context);
+        }
     }
 
     public void previous(Context context) {
+        Boolean wasPlaying = isPlaying();
         close();
         currentSong--;
         if (currentSong == -1) {
             currentSong = 2;
         }
         setSong(currentSong);
-        play(context);
+        // startForeground(1, getNotification(getCurrentSoundName(), wasPlaying));
+        if (wasPlaying) {
+            play(context);
+        }
     }
 
     public void setSong(int i) {
         currentSong = i;
+        // startForeground(1, getNotification(getCurrentSoundName(), isPlaying()));
     }
 
-    public String getCurrentSongName() {
+    public String getCurrentSoundName() {
         return songNames[currentSong];
     }
 
@@ -138,26 +146,7 @@ public class MediaPlayerService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        String title = intent.getStringExtra("inputExtra");
-
-        Intent notificationIntent = new Intent(this, MainActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_MUTABLE);
-
-        Bitmap picture = BitmapFactory.decodeResource(getResources(), R.drawable.waterfall);
-        Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setContentTitle("DeNoise is currently running.")
-                .setContentText("Tap to revisit the application.")
-                .setSmallIcon(R.drawable.logo)
-                .setLargeIcon(picture)
-                .setContentIntent(pendingIntent)
-                .addAction(R.drawable.ic_baseline_skip_previous_24, "Previous", null)
-                .addAction(R.drawable.ic_baseline_pause_24, "Play/Pause", null)
-                .addAction(R.drawable.ic_baseline_skip_next_24, "Next", null)
-                .addAction(R.drawable.ic_baseline_cancel_24, "Close", null)
-                .setStyle(new androidx.media.app.NotificationCompat.MediaStyle().setShowActionsInCompactView(1, 3))
-                .build();
-
-        startForeground(1, notification);
+        startForeground(1, getNotification(getCurrentSoundName(), getInstance().isPlaying()));
         return START_STICKY;
     }
 
@@ -168,8 +157,8 @@ public class MediaPlayerService extends Service {
 
     @Override
     public void onDestroy() {
-        super.onDestroy();
         close();
+        super.onDestroy();
     }
 
     @Nullable
@@ -177,4 +166,48 @@ public class MediaPlayerService extends Service {
     public IBinder onBind(Intent intent) {
         return null;
     }
+
+    public Notification getNotification(String sound, Boolean isPlaying) {
+
+        Intent notificationIntent = new Intent(this, MainActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_IMMUTABLE);
+
+        Intent broadcastIntent1 = new Intent(this, NotificationReceiver.class).setAction("PREVIOUS");
+        PendingIntent actionIntent1 = PendingIntent.getBroadcast(this, 0, broadcastIntent1, PendingIntent.FLAG_MUTABLE);
+
+        int playPauseIcon;
+        Intent broadcastIntent2 = new Intent(this, NotificationReceiver.class);
+        if (isPlaying) {
+            broadcastIntent2.setAction("PAUSE");
+            playPauseIcon = R.drawable.ic_baseline_pause_24;
+        } else {
+            broadcastIntent2.setAction("PLAY");
+            playPauseIcon = R.drawable.ic_baseline_play_arrow_24;
+        }
+        PendingIntent actionIntent2 = PendingIntent.getBroadcast(this, 0, broadcastIntent2, PendingIntent.FLAG_MUTABLE);
+
+        Intent broadcastIntent3 = new Intent(this, NotificationReceiver.class).setAction("NEXT");
+        PendingIntent actionIntent3 = PendingIntent.getBroadcast(this, 0, broadcastIntent3, PendingIntent.FLAG_MUTABLE);
+
+        Intent broadcastIntent0 = new Intent(this, NotificationReceiver.class).setAction("CLOSE");
+        PendingIntent actionIntent0 = PendingIntent.getBroadcast(this, 0, broadcastIntent0, PendingIntent.FLAG_MUTABLE);
+
+        Bitmap picture = BitmapFactory.decodeResource(getResources(), R.drawable.waterfall);
+        Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
+                .setContentTitle("DeNoise")
+                .setContentText(sound)
+                .setSmallIcon(R.drawable.logo)
+                .setLargeIcon(picture)
+                .setContentIntent(pendingIntent)
+                .addAction(R.drawable.ic_baseline_skip_previous_24, "Previous", actionIntent1)
+                .addAction(playPauseIcon, "Play/Pause", actionIntent2)
+                .addAction(R.drawable.ic_baseline_skip_next_24, "Next", actionIntent3)
+                .addAction(R.drawable.ic_baseline_cancel_24, "Close", actionIntent0)
+                .setStyle(new androidx.media.app.NotificationCompat.MediaStyle().setShowActionsInCompactView(0, 1, 2))
+                .setSilent(true)
+                .build();
+
+        return notification;
+    }
+
 }

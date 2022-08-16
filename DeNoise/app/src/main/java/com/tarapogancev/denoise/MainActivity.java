@@ -3,15 +3,11 @@ package com.tarapogancev.denoise;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 
-import android.app.Notification;
-import android.app.PendingIntent;
-import android.content.ComponentName;
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.ImageView;
@@ -95,9 +91,9 @@ public class MainActivity extends AppCompatActivity {
                     mediaPlayerService.pause();
                     playPauseImage.setImageResource(R.drawable.play_button);
                 } else {
-                    startService();
                     mediaPlayerService.play(MainActivity.this);
                     playPauseImage.setImageResource(R.drawable.pause_button);
+                    startService();
                 }
             }
         });
@@ -121,9 +117,9 @@ public class MainActivity extends AppCompatActivity {
         playControls.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (mediaPlayerService.getCurrentSongName() == "White Noise") {
+                if (mediaPlayerService.getCurrentSoundName() == "White Noise") {
                     redirectWhiteNoise();
-                } else if (mediaPlayerService.getCurrentSongName() == "Pink Noise")  {
+                } else if (mediaPlayerService.getCurrentSoundName() == "Pink Noise")  {
                     redirectPinkNoise();
                 } else {
                     redirectBrownNoise();
@@ -173,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void refreshCurrentSoundText() {
-        activeSoundText.setText(mediaPlayerService.getCurrentSongName());
+        activeSoundText.setText(mediaPlayerService.getCurrentSoundName());
     }
 
     private void refreshPlayPauseButton() {
@@ -226,7 +222,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void startService() {
         Intent serviceIntent = new Intent(this, MediaPlayerService.class);
-        startService(serviceIntent);
+        ContextCompat.startForegroundService(this, serviceIntent);
     }
 
     public void stopService() {

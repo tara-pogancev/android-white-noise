@@ -44,6 +44,16 @@
 
         <service android:name=".service.TimerService"/>
         <service android:name=".service.MediaPlayerService"/>
+
+        <receiver android:name=".service.NotificationReceiver" android:enabled="true" android:exported="false">
+            <intent-filter>
+                <action android:name="PREVIOUS"/>
+                <action android:name="PLAY"/>
+                <action android:name="PAUSE"/>
+                <action android:name="NEXT"/>
+                <action android:name="CLOSE"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

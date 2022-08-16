@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.tarapogancev.denoise.service.MediaPlayerService;
 
@@ -34,13 +33,13 @@ public class PinkNoisePlayer extends AppCompatActivity {
         playPauseButton = findViewById(R.id.button_playPause);
         playPauseImage = findViewById(R.id.img_playPause);
 
-        if (!mediaPlayerService.isPlaying() && !Objects.equals(mediaPlayerService.getCurrentSongName(), "Pink Noise")) {
+        if (!mediaPlayerService.isPlaying() && !Objects.equals(mediaPlayerService.getCurrentSoundName(), "Pink Noise")) {
             mediaPlayerService.close();
             mediaPlayerService.setSong(1);
             playPauseImage.setImageResource(R.drawable.play_button);
-        } else if (!mediaPlayerService.isPlaying() && Objects.equals(mediaPlayerService.getCurrentSongName(), "Pink Noise")) {
+        } else if (!mediaPlayerService.isPlaying() && Objects.equals(mediaPlayerService.getCurrentSoundName(), "Pink Noise")) {
             playPauseImage.setImageResource(R.drawable.play_button);
-        } else if (mediaPlayerService.isPlaying() && !Objects.equals(mediaPlayerService.getCurrentSongName(), "Pink Noise")) {
+        } else if (mediaPlayerService.isPlaying() && !Objects.equals(mediaPlayerService.getCurrentSoundName(), "Pink Noise")) {
             mediaPlayerService.close();
             mediaPlayerService.setSong(1);
             mediaPlayerService.play(this);

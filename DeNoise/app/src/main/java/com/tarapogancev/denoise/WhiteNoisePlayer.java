@@ -41,13 +41,13 @@ public class WhiteNoisePlayer extends AppCompatActivity {
         playPauseImage = findViewById(R.id.img_playPause);
         timerText = findViewById(R.id.text_timer);
 
-        if (!mediaPlayerService.isPlaying() && !Objects.equals(mediaPlayerService.getCurrentSongName(), "White Noise")) {
+        if (!mediaPlayerService.isPlaying() && !Objects.equals(mediaPlayerService.getCurrentSoundName(), "White Noise")) {
             mediaPlayerService.close();
             mediaPlayerService.setSong(0);
             playPauseImage.setImageResource(R.drawable.play_button);
-        } else if (!mediaPlayerService.isPlaying() && Objects.equals(mediaPlayerService.getCurrentSongName(), "White Noise")) {
+        } else if (!mediaPlayerService.isPlaying() && Objects.equals(mediaPlayerService.getCurrentSoundName(), "White Noise")) {
             playPauseImage.setImageResource(R.drawable.play_button);
-        } else if (mediaPlayerService.isPlaying() && !Objects.equals(mediaPlayerService.getCurrentSongName(), "White Noise")) {
+        } else if (mediaPlayerService.isPlaying() && !Objects.equals(mediaPlayerService.getCurrentSoundName(), "White Noise")) {
             mediaPlayerService.close();
             mediaPlayerService.setSong(0);
             mediaPlayerService.play(this);

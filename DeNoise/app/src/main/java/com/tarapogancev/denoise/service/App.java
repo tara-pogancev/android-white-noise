@@ -12,14 +12,11 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
         createNotificationChannel();
     }
 
     private void createNotificationChannel() {
         NotificationChannel channel1 = new NotificationChannel(CHANNEL_ID, "Music Service Channel", NotificationManager.IMPORTANCE_DEFAULT);
-        channel1.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
-        channel1.enableLights(true);
 
         NotificationManager manager = getSystemService(NotificationManager.class);
         manager.createNotificationChannel(channel1);
