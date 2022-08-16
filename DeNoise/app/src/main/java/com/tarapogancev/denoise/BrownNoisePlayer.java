@@ -5,7 +5,10 @@ import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.content.ContextCompat;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -19,6 +22,7 @@ public class BrownNoisePlayer extends AppCompatActivity {
     CardView backButton, timerButton, whiteNoiseButton, pinkNoiseButton, nextButton, previousButton, playPauseButton;
     ImageView playPauseImage;
     MediaPlayerService mediaPlayerService = MediaPlayerService.getInstance();
+    BroadcastReceiver broadcastReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +78,7 @@ public class BrownNoisePlayer extends AppCompatActivity {
                 } else {
                     mediaPlayerService.play(BrownNoisePlayer.this);
                     playPauseImage.setImageResource(R.drawable.pause_button);
+                    startService();
                 }
             }
         });
@@ -101,12 +106,14 @@ public class BrownNoisePlayer extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                recirectMainActivity();
+                redirectMainActivity();
             }
         });
+
+        registerReceiver();
     }
 
-    private void recirectMainActivity() {
+    private void redirectMainActivity() {
         Intent intent = new Intent(BrownNoisePlayer.this, MainActivity.class);
         finish();
         Bundle bundle = ActivityOptionsCompat.makeCustomAnimation(BrownNoisePlayer.this,
@@ -128,6 +135,32 @@ public class BrownNoisePlayer extends AppCompatActivity {
         Bundle bundle = ActivityOptionsCompat.makeCustomAnimation(BrownNoisePlayer.this,
                 android.R.anim.fade_in, android.R.anim.fade_out).toBundle();
         startActivity(intent, bundle);
+    }
+
+    private void registerReceiver() {
+        broadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                refreshPlayPauseButton();
+            }
+        };
+        registerReceiver(broadcastReceiver, new IntentFilter("RefreshPlayPause"));
+    }
+
+    private void refreshPlayPauseButton() {
+        if (mediaPlayerService.isPlaying()) {
+            playPauseImage.setImageResource(R.drawable.pause_button);
+        } else {
+            playPauseImage.setImageResource(R.drawable.play_button);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(broadcastReceiver != null) {
+            unregisterReceiver(broadcastReceiver);
+        }
     }
 
     public void startService() {
