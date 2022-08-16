@@ -5,7 +5,10 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -26,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     ImageView playPauseImage;
     RelativeLayout playControls;
     MediaPlayerService mediaPlayerService = MediaPlayerService.getInstance();
+    BroadcastReceiver broadcastReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,9 +121,9 @@ public class MainActivity extends AppCompatActivity {
         playControls.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (mediaPlayerService.getCurrentSoundName() == "White Noise") {
+                if (mediaPlayerService.getCurrentSoundName().equals("White Noise")) {
                     redirectWhiteNoise();
-                } else if (mediaPlayerService.getCurrentSoundName() == "Pink Noise")  {
+                } else if (mediaPlayerService.getCurrentSoundName().equals("Pink Noise"))  {
                     redirectPinkNoise();
                 } else {
                     redirectBrownNoise();
@@ -130,6 +134,7 @@ public class MainActivity extends AppCompatActivity {
         setupGreetingsMessage();
         refreshPlayPauseButton();
         refreshCurrentSoundText();
+        registerReceiver();
     }
 
     private void setDefaultSound() {
@@ -145,31 +150,37 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void redirectWhiteNoise() {
-        mediaPlayerService.close();
-        mediaPlayerService.setSong(0);
-        mediaPlayerService.play(this);
+        if (!MediaPlayerService.getInstance().getCurrentSoundName().equals("White Noise")) {
+            mediaPlayerService.close();
+            mediaPlayerService.setSong(0);
+            mediaPlayerService.play(this);
+        }
         Intent intent = new Intent(MainActivity.this, WhiteNoisePlayer.class);
         startActivity(intent);
     }
 
     private void redirectPinkNoise() {
-        mediaPlayerService.close();
-        mediaPlayerService.setSong(1);
-        mediaPlayerService.play(this);
+        if (!MediaPlayerService.getInstance().getCurrentSoundName().equals("Pink Noise")) {
+            mediaPlayerService.close();
+            mediaPlayerService.setSong(1);
+            mediaPlayerService.play(this);
+        }
         Intent intent = new Intent(MainActivity.this, PinkNoisePlayer.class);
         startActivity(intent);
     }
 
     private void redirectBrownNoise() {
-        mediaPlayerService.close();
-        mediaPlayerService.setSong(2);
-        mediaPlayerService.play(this);
+        if (!MediaPlayerService.getInstance().getCurrentSoundName().equals("Brown Noise")) {
+            mediaPlayerService.close();
+            mediaPlayerService.setSong(2);
+            mediaPlayerService.play(this);
+        }
         Intent intent = new Intent(MainActivity.this, BrownNoisePlayer.class);
         startActivity(intent);
     }
 
     private void refreshCurrentSoundText() {
-        activeSoundText.setText(mediaPlayerService.getCurrentSoundName());
+        activeSoundText.setText(MediaPlayerService.getInstance().getCurrentSoundName());
     }
 
     private void refreshPlayPauseButton() {
@@ -225,6 +236,24 @@ public class MainActivity extends AppCompatActivity {
         serviceIntent.putExtra("soundName", activeSoundText.getText());
         serviceIntent.putExtra("playingState", true);
         ContextCompat.startForegroundService(this, serviceIntent);
+    }
+
+    private void registerReceiver() {
+        broadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                refreshPlayPauseButton();
+            }
+        };
+        registerReceiver(broadcastReceiver, new IntentFilter("RefreshPlayPause"));
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(broadcastReceiver != null) {
+            unregisterReceiver(broadcastReceiver);
+        }
     }
 
     @Override

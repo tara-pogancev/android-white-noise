@@ -14,6 +14,7 @@ import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
 import android.os.IBinder;
 import android.provider.MediaStore;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
@@ -157,9 +158,9 @@ public class MediaPlayerService extends Service {
 
     @Override
     public void onDestroy() {
-        close();
+        getInstance().close();
         super.onDestroy();
-    }
+    }       
 
     @Nullable
     @Override
@@ -200,7 +201,7 @@ public class MediaPlayerService extends Service {
                 .setContentText("Tap to return to the application")
                 .setSmallIcon(R.drawable.logo)
                 .setLargeIcon(picture)
-//                .setContentIntent(pendingIntent)
+                .setContentIntent(pendingIntent)
 //                .addAction(R.drawable.ic_baseline_skip_previous_24, "Previous", actionIntent1)
 //                .addAction(playPauseIcon, "Play/Pause", actionIntent2)
 //                .addAction(R.drawable.ic_baseline_skip_next_24, "Next", actionIntent3)

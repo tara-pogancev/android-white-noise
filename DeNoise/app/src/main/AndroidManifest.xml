@@ -44,7 +44,7 @@
         </activity>
 
         <service android:name=".service.TimerService"/>
-        <service android:name=".service.MediaPlayerService"/>
+        <service android:name=".service.MediaPlayerService" android:stopWithTask="true"/>
 
         <receiver android:name=".service.NotificationReceiver" android:enabled="true" android:exported="false">
             <intent-filter>

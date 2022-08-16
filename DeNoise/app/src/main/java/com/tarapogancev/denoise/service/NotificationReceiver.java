@@ -32,6 +32,8 @@ public class NotificationReceiver extends BroadcastReceiver {
                     MediaPlayerService.getInstance().close();
                     Intent serviceIntent = new Intent(context, MediaPlayerService.class);
                     context.stopService(serviceIntent);
+                    Intent in = new Intent("RefreshPlayPause");
+                    context.sendBroadcast(in);
                     break;
                 }
             }

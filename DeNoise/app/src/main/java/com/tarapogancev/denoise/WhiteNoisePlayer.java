@@ -5,7 +5,10 @@ import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.content.ContextCompat;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -26,6 +29,7 @@ public class WhiteNoisePlayer extends AppCompatActivity {
     MediaPlayerService mediaPlayerService = MediaPlayerService.getInstance();
     TextView timerText;
     TimerService timerService;
+    BroadcastReceiver broadcastReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,13 +46,13 @@ public class WhiteNoisePlayer extends AppCompatActivity {
         playPauseImage = findViewById(R.id.img_playPause);
         timerText = findViewById(R.id.text_timer);
 
-        if (!mediaPlayerService.isPlaying() && !Objects.equals(mediaPlayerService.getCurrentSoundName(), "White Noise")) {
+        if (!mediaPlayerService.isPlaying() && !Objects.equals(MediaPlayerService.getInstance().getCurrentSoundName(), "White Noise")) {
             mediaPlayerService.close();
             mediaPlayerService.setSong(0);
             playPauseImage.setImageResource(R.drawable.play_button);
-        } else if (!mediaPlayerService.isPlaying() && Objects.equals(mediaPlayerService.getCurrentSoundName(), "White Noise")) {
+        } else if (!mediaPlayerService.isPlaying() && Objects.equals(MediaPlayerService.getInstance().getCurrentSoundName(), "White Noise")) {
             playPauseImage.setImageResource(R.drawable.play_button);
-        } else if (mediaPlayerService.isPlaying() && !Objects.equals(mediaPlayerService.getCurrentSoundName(), "White Noise")) {
+        } else if (mediaPlayerService.isPlaying() && !Objects.equals(MediaPlayerService.getInstance().getCurrentSoundName(), "White Noise")) {
             mediaPlayerService.close();
             mediaPlayerService.setSong(0);
             mediaPlayerService.play(this);
@@ -82,6 +86,7 @@ public class WhiteNoisePlayer extends AppCompatActivity {
                 } else {
                     mediaPlayerService.play(WhiteNoisePlayer.this);
                     playPauseImage.setImageResource(R.drawable.pause_button);
+                    startService();
                 }
             }
         });
@@ -100,15 +105,15 @@ public class WhiteNoisePlayer extends AppCompatActivity {
             }
         });
 
-        setupTimerText();
-        timerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                TimerService.getInstance().startTimer();
-                timerText.setVisibility(View.VISIBLE);
-                startTrackingTimer();
-            }
-        });
+//        setupTimerText();
+//        timerButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                TimerService.getInstance().startTimer();
+//                timerText.setVisibility(View.VISIBLE);
+//                startTrackingTimer();
+//            }
+//        });
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,41 +121,43 @@ public class WhiteNoisePlayer extends AppCompatActivity {
                 redirectMainActivity();
             }
         });
+
+        registerReceiver();
     }
 
-    private void startTrackingTimer() {
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                setupTimerText();
-                Toast.makeText(WhiteNoisePlayer.this, "12", Toast.LENGTH_SHORT).show();
-            }
-        }, 0, 1000);
-    }
+//    private void startTrackingTimer() {
+//        Timer timer = new Timer();
+//        timer.schedule(new TimerTask() {
+//            @Override
+//            public void run() {
+//                setupTimerText();
+//                Toast.makeText(WhiteNoisePlayer.this, "12", Toast.LENGTH_SHORT).show();
+//            }
+//        }, 0, 1000);
+//    }
 
-    private void setupTimerText() {
-        if (!TimerService.getInstance().isTimerRunning()) {
-            playPauseImage.setImageResource(R.drawable.play_button);
-            timerText.setVisibility(View.INVISIBLE);
-        } else {
-            long timeInMillis = TimerService.getInstance().getMillisRemaining();
-            String text = "";
-            /*
-            long hours = timeInMillis / 3600000;
-            long minutes = timeInMillis % 60000 / 60000;
-            long seconds = timeInMillis % 60000 / 1000;
-            if (hours != 0) {
-                text = hours + ":" + minutes + ":" + seconds;
-            } else if (minutes != 0) {
-                text = minutes + ":" + seconds;
-            } else {
-                text = seconds + "";
-            }*/
-
-            timerText.setText(timeInMillis + "");
-        }
-    }
+//    private void setupTimerText() {
+//        if (!TimerService.getInstance().isTimerRunning()) {
+//            playPauseImage.setImageResource(R.drawable.play_button);
+//            timerText.setVisibility(View.INVISIBLE);
+//        } else {
+//            long timeInMillis = TimerService.getInstance().getMillisRemaining();
+//            String text = "";
+//
+//            long hours = timeInMillis / 3600000;
+//            long minutes = timeInMillis % 60000 / 60000;
+//            long seconds = timeInMillis % 60000 / 1000;
+//            if (hours != 0) {
+//                text = hours + ":" + minutes + ":" + seconds;
+//            } else if (minutes != 0) {
+//                text = minutes + ":" + seconds;
+//            } else {
+//                text = seconds + "";
+//            }
+//
+//            timerText.setText(timeInMillis + "");
+//        }
+//    }
 
     private void redirectPinkNoise() {
         Intent intent = new Intent(WhiteNoisePlayer.this, PinkNoisePlayer.class);
@@ -174,6 +181,32 @@ public class WhiteNoisePlayer extends AppCompatActivity {
         Bundle bundle = ActivityOptionsCompat.makeCustomAnimation(WhiteNoisePlayer.this,
                 android.R.anim.fade_in, android.R.anim.fade_out).toBundle();
         startActivity(intent, bundle);
+    }
+
+    private void registerReceiver() {
+        broadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                refreshPlayPauseButton();
+            }
+        };
+        registerReceiver(broadcastReceiver, new IntentFilter("RefreshPlayPause"));
+    }
+
+    private void refreshPlayPauseButton() {
+        if (mediaPlayerService.isPlaying()) {
+            playPauseImage.setImageResource(R.drawable.pause_button);
+        } else {
+            playPauseImage.setImageResource(R.drawable.play_button);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(broadcastReceiver != null) {
+            unregisterReceiver(broadcastReceiver);
+        }
     }
 
     public void startService() {
