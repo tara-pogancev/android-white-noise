@@ -3,6 +3,7 @@ package com.tarapogancev.denoise;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -52,8 +53,10 @@ public class WhiteNoisePlayer extends AppCompatActivity {
             mediaPlayerService.setSong(0);
             mediaPlayerService.play(this);
             playPauseImage.setImageResource(R.drawable.pause_button);
+            startService();
         } else {
             playPauseImage.setImageResource(R.drawable.pause_button);
+            startService();
         }
 
         pinkNoiseButton.setOnClickListener(new View.OnClickListener() {
@@ -171,6 +174,13 @@ public class WhiteNoisePlayer extends AppCompatActivity {
         Bundle bundle = ActivityOptionsCompat.makeCustomAnimation(WhiteNoisePlayer.this,
                 android.R.anim.fade_in, android.R.anim.fade_out).toBundle();
         startActivity(intent, bundle);
+    }
+
+    public void startService() {
+        Intent serviceIntent = new Intent(this, MediaPlayerService.class);
+        serviceIntent.putExtra("soundName", "White Noise");
+        serviceIntent.putExtra("playingState", true);
+        ContextCompat.startForegroundService(this, serviceIntent);
     }
 
 }

@@ -182,7 +182,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void refreshTheme() {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        Boolean darkTheme = preferences.getBoolean("darkMode", false);
+        boolean darkTheme = preferences.getBoolean("darkMode", false);
         if (darkTheme) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         } else {
@@ -203,7 +203,7 @@ public class MainActivity extends AppCompatActivity {
         String greeting;
         int d = 100*currentTime.getHours() + currentTime.getMinutes();
 
-        if (d <= 400 || d > 1830) {
+        if (d <= 400 || d > 2001) {
             greeting = ("Good Night") + name;
         } else if (d <= 1100) {
             greeting = ("Good Morning") + name;
@@ -224,13 +224,7 @@ public class MainActivity extends AppCompatActivity {
         Intent serviceIntent = new Intent(this, MediaPlayerService.class);
         serviceIntent.putExtra("soundName", activeSoundText.getText());
         serviceIntent.putExtra("playingState", true);
-        //ContextCompat.startForegroundService(this, serviceIntent);
-        startService(serviceIntent);
-    }
-
-    public void stopService() {
-        Intent serviceIntent = new Intent(this, MediaPlayerService.class);
-        stopService(serviceIntent);
+        ContextCompat.startForegroundService(this, serviceIntent);
     }
 
     @Override

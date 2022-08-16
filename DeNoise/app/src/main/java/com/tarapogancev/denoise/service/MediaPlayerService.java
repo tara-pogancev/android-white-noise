@@ -2,7 +2,9 @@ package com.tarapogancev.denoise.service;
 
 import static com.tarapogancev.denoise.service.App.CHANNEL_ID;
 
+import android.app.ActivityManager;
 import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
@@ -11,6 +13,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
 import android.os.IBinder;
+import android.provider.MediaStore;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
@@ -172,10 +175,10 @@ public class MediaPlayerService extends Service {
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_IMMUTABLE);
 
         Intent broadcastIntent1 = new Intent(this, NotificationReceiver.class).setAction("PREVIOUS");
-        PendingIntent actionIntent1 = PendingIntent.getBroadcast(this, 0, broadcastIntent1, PendingIntent.FLAG_MUTABLE);
+        PendingIntent actionIntent1 = PendingIntent.getBroadcast(this, 0, broadcastIntent1, PendingIntent.FLAG_IMMUTABLE);
 
         int playPauseIcon;
-        Intent broadcastIntent2 = new Intent(this, NotificationReceiver.class);
+        Intent broadcastIntent2 = new Intent(this, NotificationReceiver.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         if (isPlaying) {
             broadcastIntent2.setAction("PAUSE");
             playPauseIcon = R.drawable.ic_baseline_pause_24;
@@ -183,30 +186,36 @@ public class MediaPlayerService extends Service {
             broadcastIntent2.setAction("PLAY");
             playPauseIcon = R.drawable.ic_baseline_play_arrow_24;
         }
-        PendingIntent actionIntent2 = PendingIntent.getBroadcast(this, 0, broadcastIntent2, PendingIntent.FLAG_MUTABLE);
+        PendingIntent actionIntent2 = PendingIntent.getBroadcast(this, 0, broadcastIntent2, PendingIntent.FLAG_IMMUTABLE);
 
         Intent broadcastIntent3 = new Intent(this, NotificationReceiver.class).setAction("NEXT");
-        PendingIntent actionIntent3 = PendingIntent.getBroadcast(this, 0, broadcastIntent3, PendingIntent.FLAG_MUTABLE);
+        PendingIntent actionIntent3 = PendingIntent.getBroadcast(this, 0, broadcastIntent3, PendingIntent.FLAG_IMMUTABLE);
 
         Intent broadcastIntent0 = new Intent(this, NotificationReceiver.class).setAction("CLOSE");
-        PendingIntent actionIntent0 = PendingIntent.getBroadcast(this, 0, broadcastIntent0, PendingIntent.FLAG_MUTABLE);
+        PendingIntent actionIntent0 = PendingIntent.getBroadcast(this, 0, broadcastIntent0, PendingIntent.FLAG_IMMUTABLE);
 
         Bitmap picture = BitmapFactory.decodeResource(getResources(), R.drawable.waterfall);
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setContentTitle("DeNoise")
-                .setContentText(sound)
+                .setContentText("Tap to return to the application")
                 .setSmallIcon(R.drawable.logo)
                 .setLargeIcon(picture)
-                .setContentIntent(pendingIntent)
-                .addAction(R.drawable.ic_baseline_skip_previous_24, "Previous", actionIntent1)
-                .addAction(playPauseIcon, "Play/Pause", actionIntent2)
-                .addAction(R.drawable.ic_baseline_skip_next_24, "Next", actionIntent3)
+//                .setContentIntent(pendingIntent)
+//                .addAction(R.drawable.ic_baseline_skip_previous_24, "Previous", actionIntent1)
+//                .addAction(playPauseIcon, "Play/Pause", actionIntent2)
+//                .addAction(R.drawable.ic_baseline_skip_next_24, "Next", actionIntent3)
                 .addAction(R.drawable.ic_baseline_cancel_24, "Close", actionIntent0)
-                .setStyle(new androidx.media.app.NotificationCompat.MediaStyle().setShowActionsInCompactView(0, 1, 2))
+                .setStyle(new androidx.media.app.NotificationCompat.MediaStyle().setShowActionsInCompactView(0))
                 .setSilent(true)
                 .build();
 
         return notification;
+    }
+
+    public void updateNotification(String sound, Boolean isPlaying) {
+        Notification notify = getNotification(sound, isPlaying);
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify(1, notify);
     }
 
 }
