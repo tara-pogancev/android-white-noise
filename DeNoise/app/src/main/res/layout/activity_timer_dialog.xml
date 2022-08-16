@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    tools:context=".TimerDialog"
+    android:padding="15dp"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp">
+        <RelativeLayout
+            android:id="@+id/layout_hours"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:text="HOURS: "/>
+
+            <EditText
+                android:id="@+id/editText_hours"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="85dp"
+                android:layout_centerVertical="true"
+                android:ems="10"
+                android:inputType="number"
+                android:text="0" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/layout_minutes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/layout_hours">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:text="MINUTES: " />
+
+            <EditText
+                android:id="@+id/editText_minutes"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="85dp"
+                android:ems="10"
+                android:inputType="number"
+                android:text="0" />
+
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_centerInParent="true">
+
+            <Button
+                android:id="@+id/button_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:text="Cancel"/>
+
+            <Button
+                android:id="@+id/button_startStopTimer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Start Timer"/>
+
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

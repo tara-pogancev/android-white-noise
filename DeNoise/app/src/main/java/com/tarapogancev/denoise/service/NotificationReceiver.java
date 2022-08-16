@@ -14,10 +14,14 @@ public class NotificationReceiver extends BroadcastReceiver {
             switch (intent.getAction()) {
                 case "PLAY": {
                     MediaPlayerService.getInstance().resume();
+                    Intent in = new Intent("RefreshPlayPause");
+                    context.sendBroadcast(in);
                     break;
                 }
                 case "PAUSE": {
                     MediaPlayerService.getInstance().pause();
+                    Intent in = new Intent("RefreshPlayPause");
+                    context.sendBroadcast(in);
                     break;
                 }
                 case "NEXT": {

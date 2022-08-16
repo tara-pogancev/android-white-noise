@@ -5,12 +5,19 @@ import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.content.ContextCompat;
 
+import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,8 +35,7 @@ public class WhiteNoisePlayer extends AppCompatActivity {
     ImageView playPauseImage;
     MediaPlayerService mediaPlayerService = MediaPlayerService.getInstance();
     TextView timerText;
-    TimerService timerService;
-    BroadcastReceiver broadcastReceiver;
+    BroadcastReceiver broadcastReceiver, broadcastReceiverTimer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,15 +111,104 @@ public class WhiteNoisePlayer extends AppCompatActivity {
             }
         });
 
-//        setupTimerText();
-//        timerButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                TimerService.getInstance().startTimer();
-//                timerText.setVisibility(View.VISIBLE);
-//                startTrackingTimer();
-//            }
-//        });
+        if (TimerService.getInstance().isTimerRunning()) {
+            timerText.setVisibility(View.VISIBLE);
+        } else {
+            timerText.setVisibility(View.INVISIBLE);
+        }
+
+        timerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Dialog dialog = new Dialog(WhiteNoisePlayer.this);
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.setCancelable(true);
+                dialog.setContentView(R.layout.activity_timer_dialog);
+
+                EditText hoursText = dialog.findViewById(R.id.editText_hours);
+                EditText minutesText = dialog.findViewById(R.id.editText_minutes);
+                Button cancelButton = dialog.findViewById(R.id.button_cancel);
+                Button startStopTimer = dialog.findViewById(R.id.button_startStopTimer);
+
+                cancelButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.cancel();
+                    }
+                });
+
+                if (TimerService.getInstance().isTimerRunning()) {
+                    startStopTimer.setText("Stop Timer");
+                    hoursText.setEnabled(false);
+                    minutesText.setEnabled(false);
+
+                    startStopTimer.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            // STOP TIMER
+                        }
+                    });
+                } else {
+                    startStopTimer.setText("Start Timer");
+                    hoursText.addTextChangedListener(new TextWatcher() {
+                        @Override
+                        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                        }
+
+                        @Override
+                        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                        }
+
+                        @Override
+                        public void afterTextChanged(Editable editable) {
+                            if (checkTimerButtonAvailability(minutesText, hoursText)) {
+                                startStopTimer.setEnabled(true);
+                            } else {
+                                startStopTimer.setEnabled(false);
+                            }
+                        }
+                    });
+                    minutesText.addTextChangedListener(new TextWatcher() {
+                        @Override
+                        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                        }
+
+                        @Override
+                        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                        }
+
+                        @Override
+                        public void afterTextChanged(Editable editable) {
+                            if (checkTimerButtonAvailability(minutesText, hoursText)) {
+                                startStopTimer.setEnabled(true);
+                            } else {
+                                startStopTimer.setEnabled(false);
+                            }
+                        }
+
+                    });
+
+                    startStopTimer.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            // START TIMER
+                            TimerService.getInstance().startTimer(WhiteNoisePlayer.this);
+                            if (!MediaPlayerService.getInstance().isPlaying()) {
+                                MediaPlayerService.getInstance().play(WhiteNoisePlayer.this);
+                            }
+                            timerText.setVisibility(View.VISIBLE);
+                            dialog.cancel();
+                        }
+                    });
+                }
+
+                dialog.show();
+            }
+        });
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,39 +220,29 @@ public class WhiteNoisePlayer extends AppCompatActivity {
         registerReceiver();
     }
 
-//    private void startTrackingTimer() {
-//        Timer timer = new Timer();
-//        timer.schedule(new TimerTask() {
-//            @Override
-//            public void run() {
-//                setupTimerText();
-//                Toast.makeText(WhiteNoisePlayer.this, "12", Toast.LENGTH_SHORT).show();
-//            }
-//        }, 0, 1000);
-//    }
+    private boolean checkTimerButtonAvailability(EditText minutes, EditText hours) {
+        String hoursString = hours.getText().toString();
+        if (!hoursString.equals("")) {
+            Integer hoursInt = Integer.parseInt(hoursString);
+            if (hoursInt > 99 || hoursInt < 0) {
+                return false;
+            }
+        }
 
-//    private void setupTimerText() {
-//        if (!TimerService.getInstance().isTimerRunning()) {
-//            playPauseImage.setImageResource(R.drawable.play_button);
-//            timerText.setVisibility(View.INVISIBLE);
-//        } else {
-//            long timeInMillis = TimerService.getInstance().getMillisRemaining();
-//            String text = "";
-//
-//            long hours = timeInMillis / 3600000;
-//            long minutes = timeInMillis % 60000 / 60000;
-//            long seconds = timeInMillis % 60000 / 1000;
-//            if (hours != 0) {
-//                text = hours + ":" + minutes + ":" + seconds;
-//            } else if (minutes != 0) {
-//                text = minutes + ":" + seconds;
-//            } else {
-//                text = seconds + "";
-//            }
-//
-//            timerText.setText(timeInMillis + "");
-//        }
-//    }
+        String minutesString = minutes.getText().toString();
+        if (!minutesString.equals("")) {
+            Integer minutesInt = Integer.parseInt(minutesString);
+            if (minutesInt > 59 || minutesInt < 0) {
+                return false;
+            }
+        }
+
+        if (minutesString.equals("") && hoursString.equals("")) {
+            return false;
+        }
+
+        return true;
+    }
 
     private void redirectPinkNoise() {
         Intent intent = new Intent(WhiteNoisePlayer.this, PinkNoisePlayer.class);
@@ -191,6 +276,16 @@ public class WhiteNoisePlayer extends AppCompatActivity {
             }
         };
         registerReceiver(broadcastReceiver, new IntentFilter("RefreshPlayPause"));
+        broadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                timerText.setText(intent.getStringExtra("timerText"));
+                if (timerText.getText().equals("0")) {
+                    timerText.setVisibility(View.INVISIBLE);
+                }
+            }
+        };
+        registerReceiver(broadcastReceiver, new IntentFilter("RefreshTimerText"));
     }
 
     private void refreshPlayPauseButton() {
@@ -206,6 +301,9 @@ public class WhiteNoisePlayer extends AppCompatActivity {
         super.onDestroy();
         if(broadcastReceiver != null) {
             unregisterReceiver(broadcastReceiver);
+        }
+        if(broadcastReceiverTimer != null) {
+            unregisterReceiver(broadcastReceiverTimer);
         }
     }
 

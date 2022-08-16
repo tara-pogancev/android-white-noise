@@ -1,20 +1,22 @@
 package com.tarapogancev.denoise.service;
 
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.os.CountDownTimer;
 import android.os.IBinder;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
-public class TimerService extends Service {
+public class TimerService {
 
     private static final long startTimeInMillis = 5000;
     private static TimerService instance;
-    Thread timerThread;
     private CountDownTimer countDownTimer;
     private Boolean timerRunning = false;
     private long timeLeftInMillis = startTimeInMillis;
+    private Context mContext;
 
     public static TimerService getInstance() {
         if (instance == null) {
@@ -23,51 +25,63 @@ public class TimerService extends Service {
         return instance;
     }
 
-    public void openTimerDialog() {
-
-    }
-
     public Boolean isTimerRunning() {
         return timerRunning;
     }
 
-    public void startTimer() {
+    public void startTimer(Context context) {
         timerRunning = true;
         countDownTimer = new CountDownTimer(timeLeftInMillis, 1000) {
             @Override
             public void onTick(long millisLeft) {
                 timeLeftInMillis = millisLeft;
+                setupTimerText(context);
             }
 
             @Override
             public void onFinish() {
                 timerRunning = false;
-                stopSounds();
+                MediaPlayerService.getInstance().pause();
+                Intent in = new Intent("RefreshPlayPause");
+                context.sendBroadcast(in);
             }
         }.start();
 
     }
 
-    private void stopSounds() {
-        MediaPlayerService.getInstance().close();
+    private void pauseSound() {
+        MediaPlayerService.getInstance().pause();
     }
 
     public void stopTimer() {
-        if (timerThread.isAlive()) {
-            timerThread.stop();
-            timerThread.destroy();
-        }
-        stopSelf();
+
     }
 
     public long getMillisRemaining() {
         return timeLeftInMillis;
     }
 
+    private void setupTimerText(Context context) {
+        if (!TimerService.getInstance().isTimerRunning()) {
+        } else {
+            long timeInMillis = TimerService.getInstance().getMillisRemaining();
+            String text = "";
 
-    @Nullable
-    @Override
-    public IBinder onBind(Intent intent) {
-        return null;
+            long hours = timeInMillis / 3600000;
+            long minutes = timeInMillis % 60000 / 60000;
+            long seconds = timeInMillis % 60000 / 1000;
+            if (hours != 0) {
+                text = hours + ":" + minutes + ":" + seconds;
+            } else if (minutes != 0) {
+                text = minutes + ":" + seconds;
+            } else {
+                text = seconds + "";
+            }
+
+            Intent in = new Intent("RefreshTimerText");
+            in.putExtra("timerText", text);
+            context.sendBroadcast(in);
+        }
     }
+
 }
