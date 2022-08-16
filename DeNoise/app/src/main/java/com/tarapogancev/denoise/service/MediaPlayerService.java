@@ -94,12 +94,6 @@ public class MediaPlayerService extends Service {
         }
     }
 
-    public void stopService() {
-        close();
-        stopForeground(true);
-        //stopSelf();
-    }
-
     public void next(Context context) {
         Boolean wasPlaying = isPlaying();
         close();
@@ -136,7 +130,13 @@ public class MediaPlayerService extends Service {
     }
 
     public Boolean isPlaying() {
-        return player != null && player.isPlaying();
+        Boolean playing = false;
+        try {
+            playing = player != null && player.isPlaying();;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return playing;
     }
 
     @Override

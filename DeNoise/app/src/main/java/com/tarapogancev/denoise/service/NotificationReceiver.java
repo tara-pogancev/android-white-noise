@@ -29,7 +29,9 @@ public class NotificationReceiver extends BroadcastReceiver {
                     break;
                 }
                 default:    {
-                    MediaPlayerService.getInstance().stopService();
+                    MediaPlayerService.getInstance().close();
+                    Intent serviceIntent = new Intent(context, MediaPlayerService.class);
+                    context.stopService(serviceIntent);
                     break;
                 }
             }
