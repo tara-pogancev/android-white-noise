@@ -13,21 +13,17 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.tarapogancev.denoise.service.MediaPlayerService;
 import com.tarapogancev.denoise.service.TimerService;
 
 import java.util.Objects;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class WhiteNoisePlayer extends AppCompatActivity {
 
@@ -112,6 +108,7 @@ public class WhiteNoisePlayer extends AppCompatActivity {
         });
 
         if (TimerService.getInstance().isTimerRunning()) {
+            timerText.setText(TimerService.getInstance().getStringTimeRemaining());
             timerText.setVisibility(View.VISIBLE);
         } else {
             timerText.setVisibility(View.INVISIBLE);
@@ -146,6 +143,9 @@ public class WhiteNoisePlayer extends AppCompatActivity {
                         @Override
                         public void onClick(View view) {
                             // STOP TIMER
+                            timerText.setVisibility(View.INVISIBLE);
+                            TimerService.getInstance().stopTimer();
+                            dialog.cancel();
                         }
                     });
                 } else {
@@ -196,7 +196,7 @@ public class WhiteNoisePlayer extends AppCompatActivity {
                         @Override
                         public void onClick(View view) {
                             // START TIMER
-                            TimerService.getInstance().startTimer(WhiteNoisePlayer.this);
+                            TimerService.getInstance().startTimer(WhiteNoisePlayer.this, getSelectedTimeInMillis(minutesText, hoursText));
                             if (!MediaPlayerService.getInstance().isPlaying()) {
                                 MediaPlayerService.getInstance().play(WhiteNoisePlayer.this);
                             }
@@ -220,10 +220,28 @@ public class WhiteNoisePlayer extends AppCompatActivity {
         registerReceiver();
     }
 
+    private long getSelectedTimeInMillis(EditText minutesText, EditText hoursText) {
+        String hoursString = hoursText.getText().toString();
+        Integer hoursInt = 0;
+        Integer minutesInt = 0;
+        if (!hoursString.equals("")) {
+            hoursInt = Integer.parseInt(hoursString) * 60000 * 60;
+        }
+
+        String minutesString = minutesText.getText().toString();
+        if (!minutesString.equals("")) {
+            minutesInt = Integer.parseInt(minutesString) * 60000;
+        }
+
+        return minutesInt + hoursInt;
+    }
+
     private boolean checkTimerButtonAvailability(EditText minutes, EditText hours) {
         String hoursString = hours.getText().toString();
+        Integer hoursInt = 0;
+        Integer minutesInt = 0;
         if (!hoursString.equals("")) {
-            Integer hoursInt = Integer.parseInt(hoursString);
+            hoursInt = Integer.parseInt(hoursString);
             if (hoursInt > 99 || hoursInt < 0) {
                 return false;
             }
@@ -231,13 +249,17 @@ public class WhiteNoisePlayer extends AppCompatActivity {
 
         String minutesString = minutes.getText().toString();
         if (!minutesString.equals("")) {
-            Integer minutesInt = Integer.parseInt(minutesString);
+            minutesInt = Integer.parseInt(minutesString);
             if (minutesInt > 59 || minutesInt < 0) {
                 return false;
             }
         }
 
         if (minutesString.equals("") && hoursString.equals("")) {
+            return false;
+        }
+
+        if (minutesInt + hoursInt == 0) {
             return false;
         }
 
@@ -282,6 +304,8 @@ public class WhiteNoisePlayer extends AppCompatActivity {
                 timerText.setText(intent.getStringExtra("timerText"));
                 if (timerText.getText().equals("0")) {
                     timerText.setVisibility(View.INVISIBLE);
+                } else {
+                    timerText.setVisibility(View.VISIBLE);
                 }
             }
         };
