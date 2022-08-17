@@ -38,6 +38,7 @@ public class TimerService {
             @Override
             public void onFinish() {
                 timerRunning = false;
+                setupTimerText(context);
                 MediaPlayerService.getInstance().pause();
                 Intent in = new Intent("RefreshPlayPause");
                 context.sendBroadcast(in);
@@ -61,6 +62,10 @@ public class TimerService {
 
     private void setupTimerText(Context context) {
         if (!TimerService.getInstance().isTimerRunning()) {
+            String text = "00";
+            Intent in = new Intent("RefreshTimerText");
+            in.putExtra("timerText", text);
+            context.sendBroadcast(in);
         } else {
             String text = getStringTimeRemaining();
             Intent in = new Intent("RefreshTimerText");

@@ -206,7 +206,7 @@ public class MediaPlayerService extends Service {
 //                .addAction(playPauseIcon, "Play/Pause", actionIntent2)
 //                .addAction(R.drawable.ic_baseline_skip_next_24, "Next", actionIntent3)
                 .addAction(R.drawable.ic_baseline_cancel_24, "Close", actionIntent0)
-                .setStyle(new androidx.media.app.NotificationCompat.MediaStyle().setShowActionsInCompactView(0))
+           //     .setStyle(new androidx.media.app.NotificationCompat.MediaStyle().setShowActionsInCompactView(0))
                 .setSilent(true)
                 .build();
 

@@ -302,7 +302,7 @@ public class WhiteNoisePlayer extends AppCompatActivity {
             @Override
             public void onReceive(Context context, Intent intent) {
                 timerText.setText(intent.getStringExtra("timerText"));
-                if (timerText.getText().equals("0")) {
+                if (timerText.getText().equals("00")) {
                     timerText.setVisibility(View.INVISIBLE);
                 } else {
                     timerText.setVisibility(View.VISIBLE);
