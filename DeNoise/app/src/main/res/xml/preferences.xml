@@ -6,24 +6,24 @@
 
         <EditTextPreference
             android:key="userName"
-            android:title="Your Name"
-            android:summary="Enter your name for the customized greetings message. This is optional."
+            android:title="@string/pref_yourName"
+            android:summary="@string/pref_nameSummary"
             android:defaultValue=""
             />
 
         <CheckBoxPreference
             android:key="darkMode"
-            android:title="Dark Mode"
+            android:title="@string/pref_darkMode"
             android:defaultValue="false"
-            android:summaryOn="Dark Mode is activated."
-            android:summaryOff="Dark Mode is not activated."
+            android:summaryOn="@string/pref_darkModeOn"
+            android:summaryOff="@string/pref_darkModeOff"
             />
 
         <ListPreference
             android:key="defaultSound"
-            android:title="Default Sound"
-            android:summary="The default sound which will be selected upon opening the application."
-            android:dialogTitle="Select default sound"
+            android:title="@string/pref_defaultSound"
+            android:summary="@string/pref_defaultSoundSummary"
+            android:dialogTitle="@string/pref_defaultSoundDialog"
             android:entries="@array/pref_defaultSound"
             android:entryValues="@array/pref_defaultSoundVal"
             android:defaultValue="White Noise"
@@ -31,9 +31,9 @@
 
         <ListPreference
             android:key="language"
-            android:title="Language"
-            android:summary="Select application language."
-            android:dialogTitle="Select application language"
+            android:title="@string/pref_language"
+            android:summary="@string/pref_languageSummary"
+            android:dialogTitle="@string/pref_languageDialog"
             android:entries="@array/pref_language"
             android:entryValues="@array/pref_languageVal"
             android:defaultValue="en"

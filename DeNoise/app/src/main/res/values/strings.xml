@@ -28,6 +28,18 @@
     <string name="start_using_denoise">Start using DeNoise</string>
     <string name="tap_to_return">Tap to return to the application</string>
 
+    <string name="pref_yourName">Your Name</string>
+    <string name="pref_nameSummary">Enter your name for the customized greetings message. This is optional.</string>
+    <string name="pref_darkMode">Dark Mode</string>
+    <string name="pref_darkModeOn">Dark Mode is activated.</string>
+    <string name="pref_darkModeOff">Dark Mode is not activated.</string>
+    <string name="pref_defaultSound">Default Sound</string>
+    <string name="pref_defaultSoundDialog">Select default sound</string>
+    <string name="pref_defaultSoundSummary">The default sound which will be selected upon opening the application.</string>
+    <string name="pref_language">Language</string>
+    <string name="pref_languageSummary">Select application language.</string>
+    <string name="pref_languageDialog">Select application language</string>
+
     <string-array name="pref_defaultSound">
         <item>White Noise</item>
         <item>Pink Noise</item>

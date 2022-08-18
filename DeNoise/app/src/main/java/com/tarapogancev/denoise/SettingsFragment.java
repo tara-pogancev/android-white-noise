@@ -63,6 +63,9 @@ public class SettingsFragment extends PreferenceFragment {
                 configuration.setLocale(locale);
                 resources.updateConfiguration(configuration, metrics);
 
+                getActivity().finish();
+                getActivity().startActivity(new Intent(getActivity(), Settings.class));
+
                 return true;
             }
         });

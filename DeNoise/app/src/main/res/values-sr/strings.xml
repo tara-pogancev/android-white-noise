@@ -29,6 +29,18 @@
     <string name="start_using_denoise">Počnite sa korišćenjem DeNoise</string>
     <string name="tap_to_return">Vrati se na aplikaciju</string>
 
+    <string name="pref_yourName">Vaše ime</string>
+    <string name="pref_nameSummary">Unesite ime koje se koristi za svrhe pozdravne poruke. Opciono je.</string>
+    <string name="pref_darkMode">Tamna tema</string>
+    <string name="pref_darkModeOn">Tamna tema je aktivirana.</string>
+    <string name="pref_darkModeOff">Tamna tema nije aktivirana.</string>
+    <string name="pref_defaultSound">Podrazumevani zvuk</string>
+    <string name="pref_defaultSoundDialog">Izaberite podrazumevani zvuk</string>
+    <string name="pref_defaultSoundSummary">Podrazumevani zvuk koji se pušta prilikom otvaranja aplikacije.</string>
+    <string name="pref_language">Jezik</string>
+    <string name="pref_languageSummary">Izaberite jezik aplikacije.</string>
+    <string name="pref_languageDialog">Izaberite jezik aplikacije</string>
+
     <string-array name="pref_defaultSound">
         <item>Beli šum</item>
         <item>Rozi šum</item>
