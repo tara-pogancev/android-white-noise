@@ -78,7 +78,7 @@
         android:layout_below="@id/layout_topBar"
         android:layout_centerHorizontal="true"
         android:fontFamily="@font/poppins_regular"
-        android:text="Brown Noise"
+        android:text="@string/brown_noise"
         android:textColor="#FFFFFF"
         android:textSize="35sp"
         android:textStyle="bold" />
@@ -102,7 +102,7 @@
         android:layout_above="@id/layout_cards"
         android:layout_marginStart="40dp"
         android:layout_marginBottom="5dp"
-        android:text="Other calming sounds..."
+        android:text="@string/other_calming_sounds"
         android:textColor="#FFFFFF"
         android:textSize="20sp" />
 
@@ -146,10 +146,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:text="White Noise"
+                        android:paddingBottom="10dp"
+                        android:text="@string/white_noise"
                         android:textColor="#D1D1D1"
-                        android:textSize="14sp"
-                        android:paddingBottom="10dp"/>
+                        android:textSize="14sp" />
 
 
                 </RelativeLayout>
@@ -190,7 +190,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:paddingBottom="10dp"
-                        android:text="Pink Noise"
+                        android:text="@string/pink_noise"
                         android:textColor="#D1D1D1"
                         android:textSize="14sp" />
 
@@ -229,7 +229,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Brown Noise"
+                android:text="@string/brown_noise"
                 android:fontFamily="@font/poppins_regular"
                 android:textColor="@color/white"
                 android:textSize="18sp"
@@ -238,7 +238,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Currently Playing"
+                android:text="@string/currently_playing"
                 android:textColor="#BCBCBC" />
 
         </LinearLayout>

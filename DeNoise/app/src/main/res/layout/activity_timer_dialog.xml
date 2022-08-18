@@ -24,7 +24,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
-                android:text="HOURS: "/>
+                android:text="@string/hours"
+                android:textAllCaps="true"/>
 
             <EditText
                 android:id="@+id/editText_hours"
@@ -49,7 +50,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
-                android:text="MINUTES: " />
+                android:text="@string/minutes"
+                android:textAllCaps="true"/>
 
             <EditText
                 android:id="@+id/editText_minutes"
@@ -80,13 +82,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="20dp"
-                android:text="Cancel"/>
+                android:text="@string/cancel"/>
 
             <Button
                 android:id="@+id/button_startStopTimer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Start Timer"/>
+                android:text="@string/start_timer"/>
 
         </LinearLayout>
     </RelativeLayout>

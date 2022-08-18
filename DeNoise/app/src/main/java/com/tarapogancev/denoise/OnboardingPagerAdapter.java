@@ -13,11 +13,10 @@ import androidx.viewpager.widget.PagerAdapter;
 
 public class OnboardingPagerAdapter extends PagerAdapter {
 
-    Context context;
+    Context mContext;
 
-    @Override
-    public int getCount() {
-        return 3;
+    public OnboardingPagerAdapter(Context context) {
+        this.mContext = context;
     }
 
     int images[] = {
@@ -26,31 +25,33 @@ public class OnboardingPagerAdapter extends PagerAdapter {
             R.drawable.relax2
     };
 
-    String titles[] = {
-            "Relax",
-            "Focus",
-            "Enjoy"
+    int titles[] = {
+            R.string.relax,
+            R.string.focus,
+            R.string.enjoy
     };
 
-    String descriptions[] = {
-            "Enjoy calming white noise sounds for focus, relaxation and sleep.",
-            "Finish your work with razor-sharp focus while filtering all distractions.",
-            "Get the relaxation you need and deserve, while finding your inner peace."
+    int descriptions[] = {
+            R.string.onboarding_slide_1,
+            R.string.onboarding_slide_2,
+            R.string.onboarding_slide_3
     };
+
+    @Override
+    public int getCount() {
+        return titles.length;
+    }
+
 
     @Override
     public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
         return view == (RelativeLayout) object;
     }
 
-    public OnboardingPagerAdapter(Context context) {
-        this.context = context;
-    }
-
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
-        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater layoutInflater = (LayoutInflater) mContext.getSystemService(mContext.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.onboarding_slider, container, false);
 
         ImageView image = view.findViewById(R.id.image_onboarding);
@@ -70,4 +71,5 @@ public class OnboardingPagerAdapter extends PagerAdapter {
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
         container.removeView((RelativeLayout) object);
     }
+
 }

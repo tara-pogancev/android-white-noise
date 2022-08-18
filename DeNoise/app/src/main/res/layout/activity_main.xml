@@ -56,7 +56,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="DeNoise"
+                        android:text="@string/denoise"
                         android:textColor="@color/white"
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="5dp"
@@ -105,7 +105,7 @@
                     android:fontFamily="@font/poppins_regular"
                     android:marqueeRepeatLimit="marquee_forever"
                     android:singleLine="true"
-                    android:text="Good Morning, Tara!"
+                    android:text="@string/good_morning"
                     android:textColor="@color/white"
                     android:textSize="25sp" />
 
@@ -128,7 +128,7 @@
                     android:ellipsize="marquee"
                     android:marqueeRepeatLimit="marquee_forever"
                     android:singleLine="true"
-                    android:text="Relaxing White Noise"
+                    android:text="@string/relaxing_white_noise"
                     android:textColor="?attr/colorOnSecondary"
                     android:textSize="20sp" />
 
@@ -276,7 +276,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_regular"
-                android:text="Brown Noise"
+                android:text="@string/brown_noise"
                 android:textColor="?attr/colorOnSecondary"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -284,7 +284,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Currently Playing"
+                android:text="@string/currently_playing"
                 android:textColor="?attr/colorOnBackground" />
 
         </LinearLayout>

@@ -25,7 +25,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="DeNoise"
+            android:text="@string/denoise"
             android:textColor="@color/white"
             android:layout_marginStart="20dp"
             android:layout_marginTop="5dp"
@@ -59,10 +59,12 @@
         android:id="@+id/button_skip"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:backgroundTint="@color/teal"
         android:layout_alignParentBottom="true"
-        android:translationY="5dp"
-        android:text="NEXT"
-        android:textSize="20sp"/>
+        android:backgroundTint="@color/teal"
+        android:textColor="@color/white"
+        android:text="@string/next"
+        android:textAllCaps="true"
+        android:textSize="20sp"
+        android:translationY="5dp" />
 
 </RelativeLayout>

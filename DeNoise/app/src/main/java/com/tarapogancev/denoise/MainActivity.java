@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         setDefaultSound();
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        if (preferences.getBoolean("firstRun", false)) {
+        if (!preferences.getBoolean("firstRun", false)) {
             SharedPreferences.Editor editor = preferences.edit();
             editor.putBoolean("firstRun", false).apply();
             Intent intent = new Intent(this, Onboarding.class);
@@ -121,11 +121,11 @@ public class MainActivity extends AppCompatActivity {
         playControls.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (mediaPlayerService.getCurrentSoundName().equals("White Noise")) {
+                if (mediaPlayerService.getActiveSound() == 0) {
                     redirectWhiteNoise();
-                } else if (mediaPlayerService.getCurrentSoundName().equals("Pink Noise"))  {
+                } else if (mediaPlayerService.getActiveSound() == 1)  {
                     redirectPinkNoise();
-                } else {
+                } else if (mediaPlayerService.getActiveSound() == 2) {
                     redirectBrownNoise();
                 }
             }
@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void redirectWhiteNoise() {
-        if (!MediaPlayerService.getInstance().getCurrentSoundName().equals("White Noise")) {
+        if (MediaPlayerService.getInstance().getActiveSound() != 0) {
             mediaPlayerService.close();
             mediaPlayerService.setSong(0);
             mediaPlayerService.play(this);
@@ -160,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void redirectPinkNoise() {
-        if (!MediaPlayerService.getInstance().getCurrentSoundName().equals("Pink Noise")) {
+        if (MediaPlayerService.getInstance().getActiveSound() != 1) {
             mediaPlayerService.close();
             mediaPlayerService.setSong(1);
             mediaPlayerService.play(this);
@@ -170,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void redirectBrownNoise() {
-        if (!MediaPlayerService.getInstance().getCurrentSoundName().equals("Brown Noise")) {
+        if (MediaPlayerService.getInstance().getActiveSound() != 2) {
             mediaPlayerService.close();
             mediaPlayerService.setSong(2);
             mediaPlayerService.play(this);
@@ -180,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void refreshCurrentSoundText() {
-        activeSoundText.setText(MediaPlayerService.getInstance().getCurrentSoundName());
+        activeSoundText.setText(MediaPlayerService.getInstance().getCurrentSoundName(this));
     }
 
     private void refreshPlayPauseButton() {
@@ -215,15 +215,15 @@ public class MainActivity extends AppCompatActivity {
         int d = 100*currentTime.getHours() + currentTime.getMinutes();
 
         if (d <= 400 || d > 2001) {
-            greeting = ("Good Night") + name;
+            greeting = (getString(R.string.good_night)) + name;
         } else if (d <= 1100) {
-            greeting = ("Good Morning") + name;
+            greeting = (getString(R.string.good_morning)) + name;
         } else if (d <= 1600) {
-            greeting = ("Good Day") + name;
+            greeting = (getString(R.string.good_day)) + name;
         } else if (d <= 2000) {
-            greeting = ("Good Afternoon") + name;
+            greeting = (getString(R.string.good_afternoon)) + name;
         } else {
-            greeting = ("Good Evening") + name;
+            greeting = (getString(R.string.good_evening)) + name;
         }
 
         greetingText.setText(greeting);

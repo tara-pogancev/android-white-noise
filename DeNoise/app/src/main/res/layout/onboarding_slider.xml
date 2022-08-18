@@ -24,9 +24,9 @@
             android:layout_below="@id/image_onboarding"
             android:layout_centerVertical="true"
             android:layout_marginTop="20dp"
-            android:gravity="center"
-            android:text="Relax"
             android:fontFamily="@font/poppins_regular"
+            android:gravity="center"
+            android:text="@string/relax"
             android:textColor="@color/black"
             android:textSize="30dp"
             android:textStyle="bold" />
@@ -39,7 +39,7 @@
             android:layout_centerVertical="true"
             android:layout_marginTop="10dp"
             android:gravity="center"
-            android:text="Enjoy calming white noise sounds for focus, relaxation and sleep."
+            android:text="@string/onboarding_slide_1"
             android:textColor="@color/black"
             android:textSize="16sp" />
 

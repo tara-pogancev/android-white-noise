@@ -1,5 +1,30 @@
 <resources>
     <string name="app_name">DeNoise - Calming White Noise</string>
+    <string name="denoise">DeNoise</string>
+    <string name="relaxing_white_noise">Relaxing White Noise</string>
+    <string name="good_morning">Good Morning</string>
+    <string name="good_night">Good Night</string>
+    <string name="good_day">Good Day</string>
+    <string name="good_afternoon">Good Afternoon</string>
+    <string name="good_evening">Good Evening</string>
+    <string name="brown_noise">Brown Noise</string>
+    <string name="currently_playing">Currently Playing</string>
+    <string name="pink_noise">Pink Noise</string>
+    <string name="other_calming_sounds">Other calming sounds...</string>
+    <string name="white_noise">White Noise</string>
+    <string name="next">Next</string>
+    <string name="hours">Hours:</string>
+    <string name="minutes">Minutes:</string>
+    <string name="cancel">Cancel</string>
+    <string name="start_timer">Start Timer</string>
+    <string name="stop_timer">Stop Timer</string>
+    <string name="relax">Relax</string>
+    <string name="focus">Focus</string>
+    <string name="enjoy">Enjoy</string>
+    <string name="onboarding_slide_1">Enjoy calming white noise sounds for focus, relaxation and sleep.</string>
+    <string name="onboarding_slide_2">Finish your work with razor-sharp focus while filtering all distractions.</string>
+    <string name="onboarding_slide_3">Get the relaxation you need and deserve, while finding your inner peace.</string>
+    <string name="start_using_denoise">Start using DeNoise</string>
 
     <string-array name="pref_defaultSound">
         <item>White Noise</item>

@@ -119,7 +119,6 @@ public class MediaPlayerService extends Service {
             currentSong = 2;
         }
         setSong(currentSong);
-        startForeground(1, getNotification(getCurrentSoundName(), wasPlaying));
         if (wasPlaying) {
             play(context);
         }
@@ -129,8 +128,17 @@ public class MediaPlayerService extends Service {
         currentSong = i;
     }
 
-    public String getCurrentSoundName() {
-        return songNames[currentSong];
+    public String getCurrentSoundName(Context context) {
+        switch (currentSong){
+            case 0: return context.getString(R.string.white_noise);
+            case 1: return context.getString(R.string.pink_noise);
+            case 2: return context.getString(R.string.brown_noise);
+            default: return null;
+        }
+    }
+
+    public int getActiveSound() {
+        return currentSong;
     }
 
     public Boolean isPlaying() {

@@ -78,9 +78,9 @@ public class Onboarding extends AppCompatActivity {
         public void onPageSelected(int position) {
             setupIndicator(position);
             if (position == 2) {
-                skipButton.setText("Start using DeNoise");
+                skipButton.setText(R.string.start_using_denoise);
             } else {
-                skipButton.setText("Next");
+                skipButton.setText(R.string.next);
             }
         }
 

@@ -48,13 +48,13 @@ public class WhiteNoisePlayer extends AppCompatActivity {
         playPauseImage = findViewById(R.id.img_playPause);
         timerText = findViewById(R.id.text_timer);
 
-        if (!mediaPlayerService.isPlaying() && !Objects.equals(MediaPlayerService.getInstance().getCurrentSoundName(), "White Noise")) {
+        if (!mediaPlayerService.isPlaying() && !(MediaPlayerService.getInstance().getActiveSound() == 0)) {
             mediaPlayerService.close();
             mediaPlayerService.setSong(0);
             playPauseImage.setImageResource(R.drawable.play_button);
-        } else if (!mediaPlayerService.isPlaying() && Objects.equals(MediaPlayerService.getInstance().getCurrentSoundName(), "White Noise")) {
+        } else if (!mediaPlayerService.isPlaying() && (MediaPlayerService.getInstance().getActiveSound() == 0)) {
             playPauseImage.setImageResource(R.drawable.play_button);
-        } else if (mediaPlayerService.isPlaying() && !Objects.equals(MediaPlayerService.getInstance().getCurrentSoundName(), "White Noise")) {
+        } else if (mediaPlayerService.isPlaying() && !(MediaPlayerService.getInstance().getActiveSound() == 0)) {
             mediaPlayerService.close();
             mediaPlayerService.setSong(0);
             mediaPlayerService.play(this);
@@ -135,7 +135,7 @@ public class WhiteNoisePlayer extends AppCompatActivity {
                 });
 
                 if (TimerService.getInstance().isTimerRunning()) {
-                    startStopTimer.setText("Stop Timer");
+                    startStopTimer.setText(getString(R.string.stop_timer));
                     hoursText.setEnabled(false);
                     minutesText.setEnabled(false);
 
@@ -149,7 +149,7 @@ public class WhiteNoisePlayer extends AppCompatActivity {
                         }
                     });
                 } else {
-                    startStopTimer.setText("Start Timer");
+                    startStopTimer.setText(getString(R.string.start_timer));
                     hoursText.addTextChangedListener(new TextWatcher() {
                         @Override
                         public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -222,8 +222,8 @@ public class WhiteNoisePlayer extends AppCompatActivity {
 
     private long getSelectedTimeInMillis(EditText minutesText, EditText hoursText) {
         String hoursString = hoursText.getText().toString();
-        Integer hoursInt = 0;
-        Integer minutesInt = 0;
+        int hoursInt = 0;
+        int minutesInt = 0;
         if (!hoursString.equals("")) {
             hoursInt = Integer.parseInt(hoursString) * 60000 * 60;
         }
@@ -238,8 +238,8 @@ public class WhiteNoisePlayer extends AppCompatActivity {
 
     private boolean checkTimerButtonAvailability(EditText minutes, EditText hours) {
         String hoursString = hours.getText().toString();
-        Integer hoursInt = 0;
-        Integer minutesInt = 0;
+        int hoursInt = 0;
+        int minutesInt = 0;
         if (!hoursString.equals("")) {
             hoursInt = Integer.parseInt(hoursString);
             if (hoursInt > 99 || hoursInt < 0) {
