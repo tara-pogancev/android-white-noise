@@ -30,14 +30,6 @@ public class MediaPlayerService extends Service {
     MediaPlayer player, playerNext;
     Context mContext;
 
-    private NotificationManagerCompat notificationManagerCompat;
-
-    String[] songNames = {
-            "White Noise",
-            "Pink Noise",
-            "Brown Noise"
-    };
-
     int[] songs = {
             R.raw.whitenoise,
             R.raw.pinknoise,
@@ -205,15 +197,15 @@ public class MediaPlayerService extends Service {
 
         Bitmap picture = BitmapFactory.decodeResource(getResources(), R.drawable.waterfall);
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setContentTitle("DeNoise")
-                .setContentText("Tap to return to the application")
+                .setContentTitle(getString(R.string.denoise))
+                .setContentText(getString(R.string.tap_to_return))
                 .setSmallIcon(R.drawable.logo)
                 .setLargeIcon(picture)
                 .setContentIntent(pendingIntent)
 //                .addAction(R.drawable.ic_baseline_skip_previous_24, "Previous", actionIntent1)
 //                .addAction(playPauseIcon, "Play/Pause", actionIntent2)
 //                .addAction(R.drawable.ic_baseline_skip_next_24, "Next", actionIntent3)
-                .addAction(R.drawable.ic_baseline_cancel_24, "Close", actionIntent0)
+                .addAction(R.drawable.ic_baseline_cancel_24, getString(R.string.close), actionIntent0)
            //     .setStyle(new androidx.media.app.NotificationCompat.MediaStyle().setShowActionsInCompactView(0))
                 .setSilent(true)
                 .build();

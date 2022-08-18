@@ -48,9 +48,6 @@
         </activity>
 
         <service
-            android:name=".service.TimerService"
-            android:stopWithTask="true"/>
-        <service
             android:name=".service.MediaPlayerService"
             android:stopWithTask="true" />
 

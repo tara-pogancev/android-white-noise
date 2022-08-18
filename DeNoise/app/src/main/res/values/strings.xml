@@ -16,6 +16,7 @@
     <string name="hours">Hours:</string>
     <string name="minutes">Minutes:</string>
     <string name="cancel">Cancel</string>
+    <string name="close">Close</string>
     <string name="start_timer">Start Timer</string>
     <string name="stop_timer">Stop Timer</string>
     <string name="relax">Relax</string>
@@ -25,10 +26,32 @@
     <string name="onboarding_slide_2">Finish your work with razor-sharp focus while filtering all distractions.</string>
     <string name="onboarding_slide_3">Get the relaxation you need and deserve, while finding your inner peace.</string>
     <string name="start_using_denoise">Start using DeNoise</string>
+    <string name="tap_to_return">Tap to return to the application</string>
 
     <string-array name="pref_defaultSound">
         <item>White Noise</item>
         <item>Pink Noise</item>
         <item>Brown Noise</item>
     </string-array>
+    <string-array name="pref_defaultSoundVal">
+        <item>White Noise</item>
+        <item>Pink Noise</item>
+        <item>Brown Noise</item>
+    </string-array>
+
+    <string-array name="pref_language">
+        <item>English</item>
+        <item>French</item>
+        <item>Spanish</item>
+        <item>Italian</item>
+        <item>Serbian</item>
+    </string-array>
+    <string-array name="pref_languageVal">
+        <item>en</item>
+        <item>es</item>
+        <item>it</item>
+        <item>fr</item>
+        <item>sr</item>
+    </string-array>
+
 </resources>

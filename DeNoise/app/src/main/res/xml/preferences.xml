@@ -25,8 +25,18 @@
             android:summary="The default sound which will be selected upon opening the application."
             android:dialogTitle="Select default sound"
             android:entries="@array/pref_defaultSound"
-            android:entryValues="@array/pref_defaultSound"
+            android:entryValues="@array/pref_defaultSoundVal"
             android:defaultValue="White Noise"
+            />
+
+        <ListPreference
+            android:key="language"
+            android:title="Language"
+            android:summary="Select application language."
+            android:dialogTitle="Select application language"
+            android:entries="@array/pref_language"
+            android:entryValues="@array/pref_languageVal"
+            android:defaultValue="en"
             />
 
     </PreferenceCategory>

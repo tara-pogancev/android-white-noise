@@ -10,8 +10,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -21,6 +23,7 @@ import com.tarapogancev.denoise.service.MediaPlayerService;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,13 +36,14 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setDefaultLanguage();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         refreshTheme();
         setDefaultSound();
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        if (!preferences.getBoolean("firstRun", false)) {
+        if (preferences.getBoolean("firstRun", false)) {
             SharedPreferences.Editor editor = preferences.edit();
             editor.putBoolean("firstRun", false).apply();
             Intent intent = new Intent(this, Onboarding.class);
@@ -63,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, Settings.class);
+                finish();
                 startActivity(intent);
             }
         });
@@ -135,6 +140,17 @@ public class MainActivity extends AppCompatActivity {
         refreshPlayPauseButton();
         refreshCurrentSoundText();
         registerReceiver();
+    }
+
+    private void setDefaultLanguage() {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String language = preferences.getString("language", "en");
+        Locale locale = new Locale(language);
+        Resources resources = getResources();
+        DisplayMetrics metrics = resources.getDisplayMetrics();
+        android.content.res.Configuration configuration = resources.getConfiguration();
+        configuration.setLocale(locale);
+        resources.updateConfiguration(configuration, metrics);
     }
 
     private void setDefaultSound() {

@@ -1,14 +1,25 @@
 package com.tarapogancev.denoise;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
-import android.preference.EditTextPreference;
+import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
-import android.preference.PreferenceScreen;
+import android.util.DisplayMetrics;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDelegate;
+
+import com.tarapogancev.denoise.service.MediaPlayerService;
+
+import java.util.Locale;
 
 public class SettingsFragment extends PreferenceFragment {
 
@@ -41,7 +52,19 @@ public class SettingsFragment extends PreferenceFragment {
             }
         });
 
+        ListPreference languagePreference = (ListPreference) findPreference("language");
+        languagePreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object o) {
+                Locale locale = new Locale((String) o);
+                Resources resources = getResources();
+                DisplayMetrics metrics = resources.getDisplayMetrics();
+                android.content.res.Configuration configuration = resources.getConfiguration();
+                configuration.setLocale(locale);
+                resources.updateConfiguration(configuration, metrics);
 
+                return true;
+            }
+        });
     }
-
 }
