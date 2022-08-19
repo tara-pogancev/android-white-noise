@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">DeNoise - Opuštajući zvuci šuma</string>
+    <string name="app_name">DeNoise - Opuštajući zvuci</string>
     <string name="denoise">DeNoise</string>
     <string name="relaxing_white_noise">Opuštajući beli šum</string>
     <string name="good_morning">Dobro jutro</string>
@@ -66,6 +66,5 @@
         <item>fr</item>
         <item>sr</item>
     </string-array>
-
 
 </resources>

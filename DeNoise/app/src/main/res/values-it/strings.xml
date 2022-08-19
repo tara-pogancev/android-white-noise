@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DeNoise - Suoni calmanti</string>
+    <string name="denoise">DeNoise</string>
+    <string name="relaxing_white_noise">Rumore bianco rilassante</string>
+    <string name="good_morning">Buongiorno</string>
+    <string name="good_night">Buona notte</string>
+    <string name="good_day">Buona giornata</string>
+    <string name="good_afternoon">Buon pomeriggio</string>
+    <string name="good_evening">Buona serata</string>
+    <string name="brown_noise">Rumore marrone</string>
+    <string name="currently_playing">Attualmente in riproduzione</string>
+    <string name="pink_noise">Rumore rosa</string>
+    <string name="other_calming_sounds">Altri suoni calmanti...</string>
+    <string name="white_noise">Rumore bianco</string>
+    <string name="next">Prossimo</string>
+    <string name="hours">Ore:</string>
+    <string name="minutes">Minuti:</string>
+    <string name="cancel">Annulla</string>
+    <string name="close">Chiudere</string>
+    <string name="start_timer">Avvia timer</string>
+    <string name="stop_timer">Ferma il timer</string>
+    <string name="relax">Rilassare</string>
+    <string name="focus">Messa a fuoco</string>
+    <string name="enjoy">Divertiti</string>
+    <string name="onboarding_slide_1">Goditi i suoni rilassanti del rumore bianco per la concentrazione, il relax e il sonno.</string>
+    <string name="onboarding_slide_2">Termina il tuo lavoro con una messa a fuoco estremamente nitida mentre filtri tutte le distrazioni.</string>
+    <string name="onboarding_slide_3">Ottieni il relax di cui hai bisogno e che meriti, mentre trovi la tua pace interiore.</string>
+    <string name="start_using_denoise">Inizia a usare DeNoise</string>
+    <string name="tap_to_return">Toccare per tornare allapplicazione</string>
+
+    <string name="pref_yourName">Il tuo nome</string>
+    <string name="pref_nameSummary">Inserisci il tuo nome per il messaggio di saluto personalizzato. Questo è facoltativo.</string>
+    <string name="pref_darkMode">Modalità scura</string>
+    <string name="pref_darkModeOn">La modalità oscura è attivata.</string>
+    <string name="pref_darkModeOff">La modalità oscura non è attivata.</string>
+    <string name="pref_defaultSound">Suono predefinito</string>
+    <string name="pref_defaultSoundDialog">Seleziona il suono predefinito</string>
+    <string name="pref_defaultSoundSummary">Il suono predefinito che verrà selezionato allapertura dellapplicazione.</string>
+    <string name="pref_language">Lingua</string>
+    <string name="pref_languageSummary">Seleziona la lingua dellapplicazione.</string>
+    <string name="pref_languageDialog">Seleziona la lingua dellapplicazione</string>
+
+    <string-array name="pref_defaultSound">
+        <item>White Noise</item>
+        <item>Pink Noise</item>
+        <item>Brown Noise</item>
+    </string-array>
+    <string-array name="pref_defaultSoundVal">
+        <item>White Noise</item>
+        <item>Pink Noise</item>
+        <item>Brown Noise</item>
+    </string-array>
+
+    <string-array name="pref_language">
+        <item>English</item>
+        <item>French</item>
+        <item>Spanish</item>
+        <item>Italian</item>
+        <item>Serbian</item>
+    </string-array>
+    <string-array name="pref_languageVal">
+        <item>en</item>
+        <item>es</item>
+        <item>it</item>
+        <item>fr</item>
+        <item>sr</item>
+    </string-array>
+
+</resources>
