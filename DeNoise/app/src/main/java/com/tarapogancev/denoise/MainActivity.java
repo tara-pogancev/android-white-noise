@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.DisplayMetrics;
@@ -27,7 +28,7 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
-    CardView settingsButton, whiteNoiseButton, pinkNoiseButton, brownNoiseButton, nextButton, previousButton, playPauseButton;
+    CardView settingsButton, whiteNoiseButton, pinkNoiseButton, brownNoiseButton, nextButton, previousButton, playPauseButton, cardEmail;
     TextView activeSoundText, greetingText;
     ImageView playPauseImage;
     RelativeLayout playControls;
@@ -62,6 +63,15 @@ public class MainActivity extends AppCompatActivity {
         activeSoundText = findViewById(R.id.text_activeText);
         playPauseImage = findViewById(R.id.img_playPause);
         playControls = findViewById(R.id.layout_playControls);
+        cardEmail = findViewById(R.id.card_email);
+
+        cardEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", "tarapogancev@gmail.com", null));
+                startActivity(Intent.createChooser(intent, getString(R.string.choose_email_client)));
+            }
+        });
 
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override

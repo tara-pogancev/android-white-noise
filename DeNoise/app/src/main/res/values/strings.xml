@@ -41,6 +41,13 @@
     <string name="pref_languageSummary">Select application language.</string>
     <string name="pref_languageDialog">Select application language</string>
 
+    <string name="why_white_noise">Why White Noise?</string>
+    <string name="white_noise_description1">White noise significantly improves sleep, focus and concentration, as well as helps reduce high levels of stress. By removing the subtle distractions of daily life, you are ensured to be focused and relaxed while seeping into the mesmerizing background sounds.</string>
+    <string name="white_noise_description2">Discover your finest potential with the ability to focus solely on yourself. We are here to help you reach your goals.</string>
+    <string name="email">tarapogancev@gmail.com</string>
+    <string name="contact_developer">Contact the Developer</string>
+    <string name="choose_email_client">Choose an Email client:</string>
+
     <string-array name="pref_defaultSound">
         <item>White Noise</item>
         <item>Pink Noise</item>

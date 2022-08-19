@@ -41,6 +41,13 @@
     <string name="pref_languageSummary">Seleccione el idioma de la aplicación.</string>
     <string name="pref_languageDialog">Seleccione el idioma de la aplicación</string>
 
+    <string name="why_white_noise">¿Por qué ruido blanco??</string>
+    <string name="white_noise_description1">El ruido blanco mejora significativamente el sueño, el enfoque y la concentración, además de ayudar a reducir los altos niveles de estrés. Al eliminar las distracciones sutiles de la vida diaria, se asegura de estar concentrado y relajado mientras se filtra en los fascinantes sonidos de fondo..</string>
+    <string name="white_noise_description2">Descubre tu mejor potencial con la capacidad de concentrarte únicamente en ti mismo. Estamos para ayudarte a alcanzar tus metas.</string>
+    <string name="email">tarapogancev@gmail.com</string>
+    <string name="contact_developer">Póngase en contacto con el desarrollador</string>
+    <string name="choose_email_client">Elige un cliente de correo electrónico:</string>
+
     <string-array name="pref_defaultSound">
         <item>Ruido blanco</item>
         <item>Ruido rosa</item>

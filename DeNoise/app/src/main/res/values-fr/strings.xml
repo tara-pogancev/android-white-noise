@@ -41,6 +41,13 @@
     <string name="pref_languageSummary">Sélectionnez la langue de lapplication.</string>
     <string name="pref_languageDialog">Sélectionnez la langue de lapplication</string>
 
+    <string name="why_white_noise">Pourquoi le bruit blanc?</string>
+    <string name="white_noise_description1">Le bruit blanc améliore considérablement le sommeil, la concentration et la concentration, tout en aidant à réduire les niveaux élevés de stress. En supprimant les distractions subtiles de la vie quotidienne, vous êtes assuré dêtre concentré et détendu tout en vous imprégnant des sons de fond fascinants.</string>
+    <string name="white_noise_description2">Découvrez votre meilleur potentiel avec la capacité de vous concentrer uniquement sur vous-même. Nous sommes là pour vous aider à atteindre vos objectifs.</string>
+    <string name="email">tarapogancev@gmail.com</string>
+    <string name="contact_developer">Contacter le développeur</string>
+    <string name="choose_email_client">Choisissez un client de messagerie:</string>
+
     <string-array name="pref_defaultSound">
         <item>White Noise</item>
         <item>Pink Noise</item>

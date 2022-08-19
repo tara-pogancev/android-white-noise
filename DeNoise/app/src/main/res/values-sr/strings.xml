@@ -41,6 +41,13 @@
     <string name="pref_languageSummary">Izaberite jezik aplikacije.</string>
     <string name="pref_languageDialog">Izaberite jezik aplikacije</string>
 
+    <string name="why_white_noise">Zašto beli šum?</string>
+    <string name="white_noise_description1">Beli šum značajno poboljšava san, fokus i koncentraciju, kao i pomaže u smanjenju visokog nivoa stresa. Uklanjanjem suptilnih ometanja svakodnevnog života, osiguraćete sebi fokus i opuštenos dok se relaksirate uz očaravajuće pozadinske zvukove.</string>
+    <string name="white_noise_description2">Otkrijte svoj najbolji potencijal uz sposobnost da se fokusirate isključivo na sebe. Tu smo da vam pomognemo da postignete svoje ciljeve.</string>
+    <string name="email">tarapogancev@gmail.com</string>
+    <string name="contact_developer">Kontaktirajte developera</string>
+    <string name="choose_email_client">Izaberite mejl klijenta:</string>
+
     <string-array name="pref_defaultSound">
         <item>Beli šum</item>
         <item>Rozi šum</item>

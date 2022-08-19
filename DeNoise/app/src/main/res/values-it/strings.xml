@@ -41,6 +41,13 @@
     <string name="pref_languageSummary">Seleziona la lingua dellapplicazione.</string>
     <string name="pref_languageDialog">Seleziona la lingua dellapplicazione</string>
 
+    <string name="why_white_noise">Perché il rumore bianco?</string>
+    <string name="white_noise_description1">Il rumore bianco migliora significativamente il sonno, la concentrazione e la concentrazione, oltre a ridurre gli alti livelli di stress. Rimuovendo le sottili distrazioni della vita quotidiana, sei sicuro di essere concentrato e rilassato mentre assorbi gli affascinanti suoni di sottofondo.</string>
+    <string name="white_noise_description2">Scopri il tuo potenziale migliore con la capacità di concentrarti esclusivamente su te stesso. Siamo qui per aiutarti a raggiungere i tuoi obiettivi.</string>
+    <string name="email">tarapogancev@gmail.com</string>
+    <string name="contact_developer">Contatta lo sviluppatore</string>
+    <string name="choose_email_client">Scegli un client di posta elettronica:</string>
+
     <string-array name="pref_defaultSound">
         <item>White Noise</item>
         <item>Pink Noise</item>
