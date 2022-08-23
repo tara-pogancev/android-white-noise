@@ -9,6 +9,7 @@ I plan on releasing this application on Play Store, as well as working on its ex
 https://www.flaticon.com/packs/music-224?word=music%20player
 https://unsplash.com/
 https://themeisle.com/illustrations/
+https://mixkit.co/
 
 ## Screenshots
 ![notesByCats](Screenshots/1.jpg)

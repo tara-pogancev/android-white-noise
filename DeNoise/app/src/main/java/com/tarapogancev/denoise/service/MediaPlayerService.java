@@ -202,11 +202,11 @@ public class MediaPlayerService extends Service {
                 .setSmallIcon(R.drawable.logo)
                 .setLargeIcon(picture)
                 .setContentIntent(pendingIntent)
+                .addAction(R.drawable.ic_baseline_cancel_24, getString(R.string.close), actionIntent0)
 //                .addAction(R.drawable.ic_baseline_skip_previous_24, "Previous", actionIntent1)
 //                .addAction(playPauseIcon, "Play/Pause", actionIntent2)
 //                .addAction(R.drawable.ic_baseline_skip_next_24, "Next", actionIntent3)
-                .addAction(R.drawable.ic_baseline_cancel_24, getString(R.string.close), actionIntent0)
-           //     .setStyle(new androidx.media.app.NotificationCompat.MediaStyle().setShowActionsInCompactView(0))
+//                .setStyle(new androidx.media.app.NotificationCompat.MediaStyle().setShowActionsInCompactView(0))
                 .setSilent(true)
                 .build();
 

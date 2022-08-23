@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/ocean"
-    tools:context=".WhiteNoisePlayer">
+    tools:context=".player.WhiteNoisePlayer">
 
     <RelativeLayout
         android:layout_width="match_parent"

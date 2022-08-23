@@ -17,8 +17,7 @@
         android:launchMode="singleInstance"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.DeNoiseCalmingWhiteNoise"
-        tools:targetApi="31">
+        android:theme="@style/Theme.DeNoiseCalmingWhiteNoise">
         <activity
             android:name=".TimerDialog"
             android:exported="false" />
@@ -29,13 +28,13 @@
             android:name=".Onboarding"
             android:exported="false" />
         <activity
-            android:name=".BrownNoisePlayer"
+            android:name=".player.BrownNoisePlayer"
             android:exported="false" />
         <activity
-            android:name=".PinkNoisePlayer"
+            android:name=".player.PinkNoisePlayer"
             android:exported="false" />
         <activity
-            android:name=".WhiteNoisePlayer"
+            android:name=".player.WhiteNoisePlayer"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

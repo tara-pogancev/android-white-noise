@@ -20,6 +20,9 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.tarapogancev.denoise.player.BrownNoisePlayer;
+import com.tarapogancev.denoise.player.PinkNoisePlayer;
+import com.tarapogancev.denoise.player.WhiteNoisePlayer;
 import com.tarapogancev.denoise.service.MediaPlayerService;
 
 import java.util.Calendar;
