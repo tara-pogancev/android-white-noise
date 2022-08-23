@@ -5,13 +5,17 @@
       <map>
         <entry key="..\:/FTN/android-white-noise/DeNoise/app/src/main/res/drawable/black_gradient.xml" value="0.194" />
         <entry key="..\:/FTN/android-white-noise/DeNoise/app/src/main/res/drawable/ripple.xml" value="0.194" />
-        <entry key="..\:/FTN/android-white-noise/DeNoise/app/src/main/res/layout/activity_brown_noise_player.xml" value="0.36666666666666664" />
+        <entry key="..\:/FTN/android-white-noise/DeNoise/app/src/main/res/layout/activity_beach_waves_player.xml" value="0.2708333333333333" />
+        <entry key="..\:/FTN/android-white-noise/DeNoise/app/src/main/res/layout/activity_brown_noise_player.xml" value="0.25" />
+        <entry key="..\:/FTN/android-white-noise/DeNoise/app/src/main/res/layout/activity_forest_player.xml" value="0.25677083333333334" />
         <entry key="..\:/FTN/android-white-noise/DeNoise/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
         <entry key="..\:/FTN/android-white-noise/DeNoise/app/src/main/res/layout/activity_onboarding.xml" value="0.33" />
         <entry key="..\:/FTN/android-white-noise/DeNoise/app/src/main/res/layout/activity_pink_noise_player.xml" value="0.33" />
+        <entry key="..\:/FTN/android-white-noise/DeNoise/app/src/main/res/layout/activity_rain_player.xml" value="0.2708333333333333" />
         <entry key="..\:/FTN/android-white-noise/DeNoise/app/src/main/res/layout/activity_settings.xml" value="0.19375" />
+        <entry key="..\:/FTN/android-white-noise/DeNoise/app/src/main/res/layout/activity_shore_player.xml" value="0.2708333333333333" />
         <entry key="..\:/FTN/android-white-noise/DeNoise/app/src/main/res/layout/activity_timer_dialog.xml" value="0.36666666666666664" />
-        <entry key="..\:/FTN/android-white-noise/DeNoise/app/src/main/res/layout/activity_white_noise_player.xml" value="0.36666666666666664" />
+        <entry key="..\:/FTN/android-white-noise/DeNoise/app/src/main/res/layout/activity_white_noise_player.xml" value="0.33" />
         <entry key="..\:/FTN/android-white-noise/DeNoise/app/src/main/res/layout/onboarding1.xml" value="0.2078125" />
         <entry key="..\:/FTN/android-white-noise/DeNoise/app/src/main/res/layout/onboarding_slider.xml" value="0.20677083333333332" />
         <entry key="..\:/FTN/android-white-noise/DeNoise/app/src/main/res/layout/timer_dialog.xml" value="0.8603515625" />

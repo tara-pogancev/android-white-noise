@@ -1,10 +1,5 @@
 package com.tarapogancev.denoise;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.cardview.widget.CardView;
-import androidx.core.content.ContextCompat;
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -20,8 +15,17 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
+
+import com.tarapogancev.denoise.player.BeachWavesPlayer;
 import com.tarapogancev.denoise.player.BrownNoisePlayer;
+import com.tarapogancev.denoise.player.ForestPlayer;
 import com.tarapogancev.denoise.player.PinkNoisePlayer;
+import com.tarapogancev.denoise.player.RainPlayer;
+import com.tarapogancev.denoise.player.ShorePlayer;
 import com.tarapogancev.denoise.player.WhiteNoisePlayer;
 import com.tarapogancev.denoise.service.MediaPlayerService;
 
@@ -31,7 +35,8 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
-    CardView settingsButton, whiteNoiseButton, pinkNoiseButton, brownNoiseButton, nextButton, previousButton, playPauseButton, cardEmail;
+    CardView settingsButton, cardWhite, cardPink, cardBrown, cardRain, cardWaves, cardForest,
+            cardShore, nextButton, previousButton, playPauseButton, cardEmail;
     TextView activeSoundText, greetingText;
     ImageView playPauseImage;
     RelativeLayout playControls;
@@ -56,9 +61,13 @@ public class MainActivity extends AppCompatActivity {
         }
 
         settingsButton = findViewById(R.id.button_settings);
-        whiteNoiseButton = findViewById(R.id.card_white);
-        pinkNoiseButton = findViewById(R.id.card_pink);
-        brownNoiseButton = findViewById(R.id.card_brown);
+        cardWhite = findViewById(R.id.card_white);
+        cardBrown = findViewById(R.id.card_brown);
+        cardPink = findViewById(R.id.card_pink);
+        cardRain = findViewById(R.id.card_rain);
+        cardWaves = findViewById(R.id.card_waves);
+        cardForest = findViewById(R.id.card_forest);
+        cardShore = findViewById(R.id.card_shore);
         nextButton = findViewById(R.id.button_next);
         previousButton = findViewById(R.id.button_previous);
         playPauseButton = findViewById(R.id.button_playPause);
@@ -85,24 +94,52 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        whiteNoiseButton.setOnClickListener(new View.OnClickListener() {
+        cardWhite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 redirectWhiteNoise();
             }
         });
 
-        pinkNoiseButton.setOnClickListener(new View.OnClickListener() {
+        cardBrown.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                redirectBrownNoise();
+            }
+        });
+
+        cardPink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 redirectPinkNoise();
             }
         });
 
-        brownNoiseButton.setOnClickListener(new View.OnClickListener() {
+        cardRain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                redirectBrownNoise();
+                redirectRain();
+            }
+        });
+
+        cardWaves.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                redirectWaves();
+            }
+        });
+
+        cardForest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                redirectForest();
+            }
+        });
+
+        cardShore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                redirectShore();
             }
         });
 
@@ -141,7 +178,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (mediaPlayerService.getActiveSound() == 0) {
                     redirectWhiteNoise();
-                } else if (mediaPlayerService.getActiveSound() == 1)  {
+                } else if (mediaPlayerService.getActiveSound() == 1) {
                     redirectPinkNoise();
                 } else if (mediaPlayerService.getActiveSound() == 2) {
                     redirectBrownNoise();
@@ -188,6 +225,16 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    private void redirectBrownNoise() {
+        if (MediaPlayerService.getInstance().getActiveSound() != 2) {
+            mediaPlayerService.close();
+            mediaPlayerService.setSong(2);
+            mediaPlayerService.play(this);
+        }
+        Intent intent = new Intent(MainActivity.this, BrownNoisePlayer.class);
+        startActivity(intent);
+    }
+
     private void redirectPinkNoise() {
         if (MediaPlayerService.getInstance().getActiveSound() != 1) {
             mediaPlayerService.close();
@@ -198,13 +245,43 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void redirectBrownNoise() {
-        if (MediaPlayerService.getInstance().getActiveSound() != 2) {
+    private void redirectRain() {
+        if (MediaPlayerService.getInstance().getActiveSound() != 3) {
             mediaPlayerService.close();
-            mediaPlayerService.setSong(2);
+            mediaPlayerService.setSong(3);
             mediaPlayerService.play(this);
         }
-        Intent intent = new Intent(MainActivity.this, BrownNoisePlayer.class);
+        Intent intent = new Intent(MainActivity.this, RainPlayer.class);
+        startActivity(intent);
+    }
+
+    private void redirectWaves() {
+        if (MediaPlayerService.getInstance().getActiveSound() != 4) {
+            mediaPlayerService.close();
+            mediaPlayerService.setSong(4);
+            mediaPlayerService.play(this);
+        }
+        Intent intent = new Intent(MainActivity.this, BeachWavesPlayer.class);
+        startActivity(intent);
+    }
+
+    private void redirectForest() {
+        if (MediaPlayerService.getInstance().getActiveSound() != 5) {
+            mediaPlayerService.close();
+            mediaPlayerService.setSong(5);
+            mediaPlayerService.play(this);
+        }
+        Intent intent = new Intent(MainActivity.this, ForestPlayer.class);
+        startActivity(intent);
+    }
+
+    private void redirectShore() {
+        if (MediaPlayerService.getInstance().getActiveSound() != 6) {
+            mediaPlayerService.close();
+            mediaPlayerService.setSong(6);
+            mediaPlayerService.play(this);
+        }
+        Intent intent = new Intent(MainActivity.this, ShorePlayer.class);
         startActivity(intent);
     }
 
@@ -241,7 +318,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         String greeting;
-        int d = 100*currentTime.getHours() + currentTime.getMinutes();
+        int d = 100 * currentTime.getHours() + currentTime.getMinutes();
 
         if (d <= 400 || d > 2001) {
             greeting = (getString(R.string.good_night)) + name;
@@ -280,7 +357,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if(broadcastReceiver != null) {
+        if (broadcastReceiver != null) {
             unregisterReceiver(broadcastReceiver);
         }
     }

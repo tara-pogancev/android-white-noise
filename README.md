@@ -5,6 +5,15 @@ The application supports both **light and dark theme**, as well as **multiple la
 
 I plan on releasing this application on Play Store, as well as working on its expantion in forms of multiple new sounds (rain, beach, fireplace, etc.) and aditional custimization. 
 
+## Sound List
+ 1. White Noise
+ 2. Brown Noise
+ 3. Pink Noise
+ 4. Calming Rain
+ 5. Beach Waves
+ 6. Relaxing Forest
+ 7. Distant Shore
+
 ## Resources
 https://www.flaticon.com/packs/music-224?word=music%20player
 https://unsplash.com/

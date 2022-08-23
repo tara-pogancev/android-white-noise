@@ -19,6 +19,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DeNoiseCalmingWhiteNoise">
         <activity
+            android:name=".player.BeachWavesPlayer"
+            android:exported="false" />
+        <activity
+            android:name=".player.ForestPlayer"
+            android:exported="false" />
+        <activity
+            android:name=".player.ShorePlayer"
+            android:exported="false" />
+        <activity
+            android:name=".player.RainPlayer"
+            android:exported="false" />
+        <activity
             android:name=".TimerDialog"
             android:exported="false" />
         <activity

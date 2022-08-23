@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 
 public class TimerService {
 
-    private long startTimeInMillis = 10000;
+    private final long startTimeInMillis = 10000;
     private static TimerService instance;
     private CountDownTimer countDownTimer;
     private Boolean timerRunning = false;

@@ -28,6 +28,10 @@
     <string name="onboarding_slide_3">Obtenez la détente dont vous avez besoin et que vous méritez, tout en trouvant votre paix intérieure.</string>
     <string name="start_using_denoise">Commencez à utiliser DeNoise</string>
     <string name="tap_to_return">Appuyez pour revenir à lapplication</string>
+    <string name="calming_rain">Pluie apaisante</string>
+    <string name="beach_waves">Vagues de la plage</string>
+    <string name="distant_shore">Rivage lointain</string>
+    <string name="relaxing_forest">Forêt relaxante</string>
 
     <string name="pref_yourName">Votre nom</string>
     <string name="pref_nameSummary">Entrez votre nom pour le message daccueil personnalisé. Ceci est facultatif.</string>

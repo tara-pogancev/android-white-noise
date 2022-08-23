@@ -1,10 +1,5 @@
 package com.tarapogancev.denoise.player;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-import androidx.core.app.ActivityOptionsCompat;
-import androidx.core.content.ContextCompat;
-
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -20,6 +15,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.content.ContextCompat;
+
 import com.tarapogancev.denoise.MainActivity;
 import com.tarapogancev.denoise.R;
 import com.tarapogancev.denoise.service.MediaPlayerService;
@@ -27,7 +27,7 @@ import com.tarapogancev.denoise.service.TimerService;
 
 public class PinkNoisePlayer extends AppCompatActivity {
 
-    CardView backButton, timerButton, whiteNoiseButton, brownNoiseButton, nextButton, previousButton, playPauseButton;
+    CardView backButton, timerButton, cardPrev, cardNext, nextButton, previousButton, playPauseButton;
     ImageView playPauseImage;
     MediaPlayerService mediaPlayerService = MediaPlayerService.getInstance();
     TextView timerText;
@@ -40,8 +40,8 @@ public class PinkNoisePlayer extends AppCompatActivity {
 
         backButton = findViewById(R.id.button_back);
         timerButton = findViewById(R.id.button_timer);
-        whiteNoiseButton = findViewById(R.id.card_white);
-        brownNoiseButton = findViewById(R.id.card_brown);
+        cardPrev = findViewById(R.id.card_prev);
+        cardNext = findViewById(R.id.card_next);
         nextButton = findViewById(R.id.button_next);
         previousButton = findViewById(R.id.button_previous);
         playPauseButton = findViewById(R.id.button_playPause);
@@ -65,17 +65,17 @@ public class PinkNoisePlayer extends AppCompatActivity {
             startService();
         }
 
-        whiteNoiseButton.setOnClickListener(new View.OnClickListener() {
+        cardPrev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 redirect(WhiteNoisePlayer.class);
             }
         });
 
-        brownNoiseButton.setOnClickListener(new View.OnClickListener() {
+        cardNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                redirect(BrownNoisePlayer.class);
+                redirect(RainPlayer.class);
             }
         });
 
@@ -96,14 +96,14 @@ public class PinkNoisePlayer extends AppCompatActivity {
         previousButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                redirect(WhiteNoisePlayer.class);
+                redirect(BrownNoisePlayer.class);
             }
         });
 
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                redirect(BrownNoisePlayer.class);
+                redirect(RainPlayer.class);
             }
         });
 
@@ -163,11 +163,7 @@ public class PinkNoisePlayer extends AppCompatActivity {
 
                         @Override
                         public void afterTextChanged(Editable editable) {
-                            if (checkTimerButtonAvailability(minutesText, hoursText)) {
-                                startStopTimer.setEnabled(true);
-                            } else {
-                                startStopTimer.setEnabled(false);
-                            }
+                            startStopTimer.setEnabled(checkTimerButtonAvailability(minutesText, hoursText));
                         }
                     });
                     minutesText.addTextChangedListener(new TextWatcher() {
@@ -183,11 +179,7 @@ public class PinkNoisePlayer extends AppCompatActivity {
 
                         @Override
                         public void afterTextChanged(Editable editable) {
-                            if (checkTimerButtonAvailability(minutesText, hoursText)) {
-                                startStopTimer.setEnabled(true);
-                            } else {
-                                startStopTimer.setEnabled(false);
-                            }
+                            startStopTimer.setEnabled(checkTimerButtonAvailability(minutesText, hoursText));
                         }
 
                     });
@@ -259,11 +251,7 @@ public class PinkNoisePlayer extends AppCompatActivity {
             return false;
         }
 
-        if (minutesInt + hoursInt == 0) {
-            return false;
-        }
-
-        return true;
+        return minutesInt + hoursInt != 0;
     }
 
     private void redirect(Class<?> activity) {
@@ -307,10 +295,10 @@ public class PinkNoisePlayer extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if(broadcastReceiver != null) {
+        if (broadcastReceiver != null) {
             unregisterReceiver(broadcastReceiver);
         }
-        if(broadcastReceiverTimer != null) {
+        if (broadcastReceiverTimer != null) {
             unregisterReceiver(broadcastReceiverTimer);
         }
     }

@@ -19,19 +19,19 @@ public class OnboardingPagerAdapter extends PagerAdapter {
         this.mContext = context;
     }
 
-    int images[] = {
+    int[] images = {
             R.drawable.sleep,
             R.drawable.focus,
             R.drawable.relax2
     };
 
-    int titles[] = {
+    int[] titles = {
             R.string.relax,
             R.string.focus,
             R.string.enjoy
     };
 
-    int descriptions[] = {
+    int[] descriptions = {
             R.string.onboarding_slide_1,
             R.string.onboarding_slide_2,
             R.string.onboarding_slide_3
@@ -45,13 +45,13 @@ public class OnboardingPagerAdapter extends PagerAdapter {
 
     @Override
     public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
-        return view == (RelativeLayout) object;
+        return view == object;
     }
 
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
-        LayoutInflater layoutInflater = (LayoutInflater) mContext.getSystemService(mContext.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater layoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.onboarding_slider, container, false);
 
         ImageView image = view.findViewById(R.id.image_onboarding);

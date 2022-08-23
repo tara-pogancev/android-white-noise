@@ -116,7 +116,7 @@
         android:orientation="horizontal"
         >
         <androidx.cardview.widget.CardView
-            android:id="@+id/card_white"
+            android:id="@+id/card_prev"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.50"
@@ -159,7 +159,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/card_pink"
+            android:id="@+id/card_next"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.50"

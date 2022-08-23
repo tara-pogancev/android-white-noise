@@ -28,6 +28,10 @@
     <string name="onboarding_slide_3">Get the relaxation you need and deserve, while finding your inner peace.</string>
     <string name="start_using_denoise">Start using DeNoise</string>
     <string name="tap_to_return">Tap to return to the application</string>
+    <string name="calming_rain">Calming Rain</string>
+    <string name="beach_waves">Beach Waves</string>
+    <string name="distant_shore">Distant Shore</string>
+    <string name="relaxing_forest">Relaxing Forest</string>
 
     <string name="pref_yourName">Your Name</string>
     <string name="pref_nameSummary">Enter your name for the customized greetings message. This is optional.</string>

@@ -1,17 +1,14 @@
 package com.tarapogancev.denoise;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
 
 public class Onboarding extends AppCompatActivity {
 
@@ -42,8 +39,8 @@ public class Onboarding extends AppCompatActivity {
             }
         });
 
-        sliderViewPager = (ViewPager) findViewById(R.id.layout_slider);
-        lineIndicatorLayout = (LinearLayout) findViewById(R.id.layout_onboardingIndicators);
+        sliderViewPager = findViewById(R.id.layout_slider);
+        lineIndicatorLayout = findViewById(R.id.layout_onboardingIndicators);
 
         onboardingPagerAdapter = new OnboardingPagerAdapter(this);
         sliderViewPager.setAdapter(onboardingPagerAdapter);
@@ -56,7 +53,7 @@ public class Onboarding extends AppCompatActivity {
         lines = new TextView[3];
         lineIndicatorLayout.removeAllViews();
 
-        for (int i = 0; i <3; i++) {
+        for (int i = 0; i < 3; i++) {
             lines[i] = new TextView(this);
             lines[i].setText("_ ");
             lines[i].setTextSize(50);

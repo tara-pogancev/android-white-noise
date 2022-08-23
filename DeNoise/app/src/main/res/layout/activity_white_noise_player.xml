@@ -115,7 +115,7 @@
 
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/card_pink"
+            android:id="@+id/card_prev"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginEnd="10dp"
@@ -126,13 +126,13 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/sunset">
+                android:background="@drawable/shore">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_alignParentBottom="true"
-                    android:background="@drawable/sunset_blur">
+                    android:background="@drawable/shore_blur">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -144,7 +144,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:paddingBottom="10dp"
-                        android:text="@string/pink_noise"
+                        android:text="@string/distant_shore"
                         android:textColor="#D1D1D1"
                         android:textSize="14sp" />
 
@@ -157,7 +157,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/card_brown"
+            android:id="@+id/card_next"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginStart="10dp"

@@ -1,10 +1,8 @@
 package com.tarapogancev.denoise.service;
 
 import android.app.Application;
-import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.os.Build;
 
 public class App extends Application {
     public static final String CHANNEL_ID = "musicServiceChannel";

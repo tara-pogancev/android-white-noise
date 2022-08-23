@@ -3,8 +3,6 @@ package com.tarapogancev.denoise.service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
-import android.widget.Toast;
 
 public class NotificationReceiver extends BroadcastReceiver {
 
@@ -32,7 +30,7 @@ public class NotificationReceiver extends BroadcastReceiver {
                     MediaPlayerService.getInstance().previous(context);
                     break;
                 }
-                default:    {
+                default: {
                     MediaPlayerService.getInstance().close();
                     Intent serviceIntent = new Intent(context, MediaPlayerService.class);
                     context.stopService(serviceIntent);

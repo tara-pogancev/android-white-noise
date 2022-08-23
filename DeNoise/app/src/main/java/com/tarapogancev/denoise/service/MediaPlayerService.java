@@ -2,7 +2,6 @@ package com.tarapogancev.denoise.service;
 
 import static com.tarapogancev.denoise.service.App.CHANNEL_ID;
 
-import android.app.ActivityManager;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -13,12 +12,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
 import android.os.IBinder;
-import android.provider.MediaStore;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 
 import com.tarapogancev.denoise.MainActivity;
 import com.tarapogancev.denoise.R;
@@ -33,7 +29,11 @@ public class MediaPlayerService extends Service {
     int[] songs = {
             R.raw.whitenoise,
             R.raw.pinknoise,
-            R.raw.brownnoise
+            R.raw.brownnoise,
+            R.raw.rain,
+            R.raw.waves,
+            R.raw.forest,
+            R.raw.distantwaves
     };
 
     public static MediaPlayerService getInstance() {
@@ -62,7 +62,7 @@ public class MediaPlayerService extends Service {
         player.setOnCompletionListener(onCompletionListener);
     }
 
-    private MediaPlayer.OnCompletionListener onCompletionListener = new MediaPlayer.OnCompletionListener() {
+    private final MediaPlayer.OnCompletionListener onCompletionListener = new MediaPlayer.OnCompletionListener() {
         @Override
         public void onCompletion(MediaPlayer mediaPlayer) {
             mediaPlayer.release();
@@ -121,11 +121,23 @@ public class MediaPlayerService extends Service {
     }
 
     public String getCurrentSoundName(Context context) {
-        switch (currentSong){
-            case 0: return context.getString(R.string.white_noise);
-            case 1: return context.getString(R.string.pink_noise);
-            case 2: return context.getString(R.string.brown_noise);
-            default: return null;
+        switch (currentSong) {
+            case 0:
+                return context.getString(R.string.white_noise);
+            case 1:
+                return context.getString(R.string.pink_noise);
+            case 2:
+                return context.getString(R.string.brown_noise);
+            case 3:
+                return context.getString(R.string.calming_rain);
+            case 4:
+                return context.getString(R.string.beach_waves);
+            case 5:
+                return context.getString(R.string.relaxing_forest);
+            case 6:
+                return context.getString(R.string.distant_shore);
+            default:
+                return null;
         }
     }
 
@@ -136,7 +148,7 @@ public class MediaPlayerService extends Service {
     public Boolean isPlaying() {
         Boolean playing = false;
         try {
-            playing = player != null && player.isPlaying();;
+            playing = player != null && player.isPlaying();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -160,7 +172,7 @@ public class MediaPlayerService extends Service {
     public void onDestroy() {
         getInstance().close();
         super.onDestroy();
-    }       
+    }
 
     @Nullable
     @Override
