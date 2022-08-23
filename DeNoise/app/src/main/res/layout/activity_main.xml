@@ -156,7 +156,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:scaleType="centerCrop"
-                                android:src="@drawable/ocean" />
+                                android:src="@drawable/ocean_tiny" />
 
                             <RelativeLayout
                                 android:layout_width="match_parent"
@@ -192,7 +192,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:scaleType="centerCrop"
-                                android:src="@drawable/waterfall" />
+                                android:src="@drawable/waterfall_tiny" />
 
                             <RelativeLayout
                                 android:layout_width="match_parent"
@@ -228,7 +228,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:scaleType="centerCrop"
-                                android:src="@drawable/sunset" />
+                                android:src="@drawable/sunset_tiny" />
 
                             <RelativeLayout
                                 android:layout_width="match_parent"
@@ -264,7 +264,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:scaleType="centerCrop"
-                                android:src="@drawable/rain" />
+                                android:src="@drawable/rain_tiny" />
 
                             <RelativeLayout
                                 android:layout_width="match_parent"
@@ -300,7 +300,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:scaleType="centerCrop"
-                                android:src="@drawable/water" />
+                                android:src="@drawable/tiny_water" />
 
                             <RelativeLayout
                                 android:layout_width="match_parent"
@@ -336,7 +336,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:scaleType="centerCrop"
-                                android:src="@drawable/forest" />
+                                android:src="@drawable/forest_tiny" />
 
                             <RelativeLayout
                                 android:layout_width="match_parent"
@@ -372,7 +372,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:scaleType="centerCrop"
-                                android:src="@drawable/shore" />
+                                android:src="@drawable/shore_tiny" />
 
                             <RelativeLayout
                                 android:layout_width="match_parent"
