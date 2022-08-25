@@ -56,11 +56,19 @@
         <item>Ruido blanco</item>
         <item>Ruido rosa</item>
         <item>Ruido marrón</item>
+        <item>Lluvia calmante</item>
+        <item>Olas de playa</item>
+        <item>Bosque Relajante</item>
+        <item>Costa distante</item>
     </string-array>
     <string-array name="pref_defaultSoundVal">
         <item>White Noise</item>
         <item>Pink Noise</item>
         <item>Brown Noise</item>
+        <item>Calming Rain</item>
+        <item>Beach Waves</item>
+        <item>Relaxing Forest</item>
+        <item>Distant Shore</item>
     </string-array>
 
     <string-array name="pref_language">

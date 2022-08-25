@@ -231,7 +231,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/calming_rain"
+                android:text="@string/beach_waves"
                 android:fontFamily="@font/poppins_regular"
                 android:textColor="@color/white"
                 android:textSize="18sp"

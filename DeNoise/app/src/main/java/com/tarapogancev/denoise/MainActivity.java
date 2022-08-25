@@ -210,8 +210,16 @@ public class MainActivity extends AppCompatActivity {
             mediaPlayerService.setSong(0);
         } else if (defaultSound.equals("Pink Noise")) {
             mediaPlayerService.setSong(1);
-        } else {
+        } else if (defaultSound.equals("Brown Noise")) {
             mediaPlayerService.setSong(2);
+        } else if (defaultSound.equals("Calming Rain")) {
+            mediaPlayerService.setSong(3);
+        } else if (defaultSound.equals("Beach Waves")) {
+            mediaPlayerService.setSong(4);
+        } else if (defaultSound.equals("Relaxing Forest")) {
+            mediaPlayerService.setSong(5);
+        } else {
+            mediaPlayerService.setSong(6);
         }
     }
 
