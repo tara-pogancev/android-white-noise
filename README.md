@@ -21,7 +21,7 @@ https://themeisle.com/illustrations/
 https://mixkit.co/
 
 ## Screenshots
-![notesByCats](Screenshots/1.jpg)
-![notesByCats](Screenshots/2.jpg)
-![notesByCats](Screenshots/3.jpg)
+![deNoise](Screenshots/1.jpg)
+![deNoise](Screenshots/2.jpg)
+![deNoise](Screenshots/3.jpg)
 

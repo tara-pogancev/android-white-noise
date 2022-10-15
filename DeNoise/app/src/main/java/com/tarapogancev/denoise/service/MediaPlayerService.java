@@ -94,7 +94,7 @@ public class MediaPlayerService extends Service {
         Boolean wasPlaying = isPlaying();
         close();
         currentSong++;
-        if (currentSong == 3) {
+        if (currentSong == 7) {
             currentSong = 0;
         }
         setSong(currentSong);
@@ -108,7 +108,7 @@ public class MediaPlayerService extends Service {
         close();
         currentSong--;
         if (currentSong == -1) {
-            currentSong = 2;
+            currentSong = 6;
         }
         setSong(currentSong);
         if (wasPlaying) {
