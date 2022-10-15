@@ -5,7 +5,12 @@ The application supports both **light and dark theme**, as well as **multiple la
 
 I plan on releasing this application on Play Store, as well as working on its expantion in forms of multiple new sounds (rain, beach, fireplace, etc.) and aditional custimization. 
 
+# Google Play Release
+
+https://play.google.com/store/apps/details?id=com.tarapogancev.denoise&hl=en&gl=US
+
 ## Sound List
+
  1. White Noise
  2. Brown Noise
  3. Pink Noise
@@ -15,9 +20,13 @@ I plan on releasing this application on Play Store, as well as working on its ex
  7. Distant Shore
 
 ## Resources
+
 https://www.flaticon.com/packs/music-224?word=music%20player
+
 https://unsplash.com/
+
 https://themeisle.com/illustrations/
+
 https://mixkit.co/
 
 ## Screenshots
