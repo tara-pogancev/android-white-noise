@@ -1,4 +1,13 @@
 # DeNoise - White Noise Application
+![Android Studio](https://img.shields.io/badge/Android%20Studio-3DDC84.svg?style=for-the-badge&logo=android-studio&logoColor=white)
+
+![Android](https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white)
+
+![Play Store](https://img.shields.io/badge/Google_Play-414141?style=for-the-badge&logo=google-play&logoColor=white)
+
+![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)
+
+
 DeNoise - White Noise Application for relaxation, studying or sleeping, made in Android Studio.
 
 The application supports both **light and dark theme**, as well as **multiple languages**. Pleasently designed, it allows its users to listen to calming white/pink/brown noise sounds to relax, focus or help with sleep. A timer can be sey up, which will automatically turn off the sounds after the predetermined time has passed.
