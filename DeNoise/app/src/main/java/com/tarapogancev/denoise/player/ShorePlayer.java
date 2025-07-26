@@ -64,47 +64,24 @@ public class ShorePlayer extends AppCompatActivity {
             startService();
         }
 
-        cardPrev.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                redirect(ForestPlayer.class);
+        cardPrev.setOnClickListener(view -> redirect(ForestPlayer.class));
+
+        cardNext.setOnClickListener(view -> redirect(WhiteNoisePlayer.class));
+
+        playPauseButton.setOnClickListener(view -> {
+            if (mediaPlayerService.isPlaying()) {
+                mediaPlayerService.pause();
+                playPauseImage.setImageResource(R.drawable.play_button);
+            } else {
+                mediaPlayerService.play(ShorePlayer.this);
+                playPauseImage.setImageResource(R.drawable.pause_button);
+                startService();
             }
         });
 
-        cardNext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                redirect(WhiteNoisePlayer.class);
-            }
-        });
+        previousButton.setOnClickListener(view -> redirect(ForestPlayer.class));
 
-        playPauseButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (mediaPlayerService.isPlaying()) {
-                    mediaPlayerService.pause();
-                    playPauseImage.setImageResource(R.drawable.play_button);
-                } else {
-                    mediaPlayerService.play(ShorePlayer.this);
-                    playPauseImage.setImageResource(R.drawable.pause_button);
-                    startService();
-                }
-            }
-        });
-
-        previousButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                redirect(ForestPlayer.class);
-            }
-        });
-
-        nextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                redirect(WhiteNoisePlayer.class);
-            }
-        });
+        nextButton.setOnClickListener(view -> redirect(WhiteNoisePlayer.class));
 
         if (TimerService.getInstance().isTimerRunning()) {
             timerText.setText(TimerService.getInstance().getStringTimeRemaining());
@@ -113,100 +90,81 @@ public class ShorePlayer extends AppCompatActivity {
             timerText.setVisibility(View.INVISIBLE);
         }
 
-        timerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Dialog dialog = new Dialog(ShorePlayer.this);
-                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                dialog.setCancelable(true);
-                dialog.setContentView(R.layout.activity_timer_dialog);
+        timerButton.setOnClickListener(view -> {
+            Dialog dialog = new Dialog(ShorePlayer.this);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setCancelable(true);
+            dialog.setContentView(R.layout.activity_timer_dialog);
 
-                EditText hoursText = dialog.findViewById(R.id.editText_hours);
-                EditText minutesText = dialog.findViewById(R.id.editText_minutes);
-                Button cancelButton = dialog.findViewById(R.id.button_cancel);
-                Button startStopTimer = dialog.findViewById(R.id.button_startStopTimer);
+            EditText hoursText = dialog.findViewById(R.id.editText_hours);
+            EditText minutesText = dialog.findViewById(R.id.editText_minutes);
+            Button cancelButton = dialog.findViewById(R.id.button_cancel);
+            Button startStopTimer = dialog.findViewById(R.id.button_startStopTimer);
 
-                cancelButton.setOnClickListener(new View.OnClickListener() {
+            cancelButton.setOnClickListener(view2 -> dialog.cancel());
+
+            if (TimerService.getInstance().isTimerRunning()) {
+                startStopTimer.setText(getString(R.string.stop_timer));
+                hoursText.setEnabled(false);
+                minutesText.setEnabled(false);
+
+                startStopTimer.setOnClickListener(view3 -> {
+                    // STOP TIMER
+                    timerText.setVisibility(View.INVISIBLE);
+                    TimerService.getInstance().stopTimer();
+                    dialog.cancel();
+                });
+            } else {
+                startStopTimer.setText(getString(R.string.start_timer));
+                hoursText.addTextChangedListener(new TextWatcher() {
                     @Override
-                    public void onClick(View view) {
-                        dialog.cancel();
+                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable editable) {
+                        startStopTimer.setEnabled(checkTimerButtonAvailability(minutesText, hoursText));
                     }
                 });
+                minutesText.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-                if (TimerService.getInstance().isTimerRunning()) {
-                    startStopTimer.setText(getString(R.string.stop_timer));
-                    hoursText.setEnabled(false);
-                    minutesText.setEnabled(false);
+                    }
 
-                    startStopTimer.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            // STOP TIMER
-                            timerText.setVisibility(View.INVISIBLE);
-                            TimerService.getInstance().stopTimer();
-                            dialog.cancel();
-                        }
-                    });
-                } else {
-                    startStopTimer.setText(getString(R.string.start_timer));
-                    hoursText.addTextChangedListener(new TextWatcher() {
-                        @Override
-                        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    @Override
+                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-                        }
+                    }
 
-                        @Override
-                        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    @Override
+                    public void afterTextChanged(Editable editable) {
+                        startStopTimer.setEnabled(checkTimerButtonAvailability(minutesText, hoursText));
+                    }
 
-                        }
+                });
 
-                        @Override
-                        public void afterTextChanged(Editable editable) {
-                            startStopTimer.setEnabled(checkTimerButtonAvailability(minutesText, hoursText));
-                        }
-                    });
-                    minutesText.addTextChangedListener(new TextWatcher() {
-                        @Override
-                        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-                        }
-
-                        @Override
-                        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-                        }
-
-                        @Override
-                        public void afterTextChanged(Editable editable) {
-                            startStopTimer.setEnabled(checkTimerButtonAvailability(minutesText, hoursText));
-                        }
-
-                    });
-
-                    startStopTimer.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            // START TIMER
-                            TimerService.getInstance().startTimer(ShorePlayer.this, getSelectedTimeInMillis(minutesText, hoursText));
-                            if (!MediaPlayerService.getInstance().isPlaying()) {
-                                MediaPlayerService.getInstance().play(ShorePlayer.this);
-                            }
-                            timerText.setVisibility(View.VISIBLE);
-                            dialog.cancel();
-                        }
-                    });
-                }
-
-                dialog.show();
+                startStopTimer.setOnClickListener(view1 -> {
+                    // START TIMER
+                    TimerService.getInstance().startTimer(ShorePlayer.this, getSelectedTimeInMillis(minutesText, hoursText));
+                    if (!MediaPlayerService.getInstance().isPlaying()) {
+                        MediaPlayerService.getInstance().play(ShorePlayer.this);
+                    }
+                    timerText.setVisibility(View.VISIBLE);
+                    dialog.cancel();
+                });
             }
+
+            dialog.show();
         });
 
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                redirect(MainActivity.class);
-            }
-        });
+        backButton.setOnClickListener(view -> redirect(MainActivity.class));
 
         registerReceiver();
     }
@@ -215,12 +173,12 @@ public class ShorePlayer extends AppCompatActivity {
         String hoursString = hoursText.getText().toString();
         int hoursInt = 0;
         int minutesInt = 0;
-        if (!hoursString.equals("")) {
+        if (!hoursString.isEmpty()) {
             hoursInt = Integer.parseInt(hoursString) * 60000 * 60;
         }
 
         String minutesString = minutesText.getText().toString();
-        if (!minutesString.equals("")) {
+        if (!minutesString.isEmpty()) {
             minutesInt = Integer.parseInt(minutesString) * 60000;
         }
 
@@ -231,7 +189,7 @@ public class ShorePlayer extends AppCompatActivity {
         String hoursString = hours.getText().toString();
         int hoursInt = 0;
         int minutesInt = 0;
-        if (!hoursString.equals("")) {
+        if (!hoursString.isEmpty()) {
             hoursInt = Integer.parseInt(hoursString);
             if (hoursInt > 99 || hoursInt < 0) {
                 return false;
@@ -239,14 +197,14 @@ public class ShorePlayer extends AppCompatActivity {
         }
 
         String minutesString = minutes.getText().toString();
-        if (!minutesString.equals("")) {
+        if (!minutesString.isEmpty()) {
             minutesInt = Integer.parseInt(minutesString);
             if (minutesInt > 59 || minutesInt < 0) {
                 return false;
             }
         }
 
-        if (minutesString.equals("") && hoursString.equals("")) {
+        if (minutesString.isEmpty() && hoursString.isEmpty()) {
             return false;
         }
 
@@ -268,7 +226,7 @@ public class ShorePlayer extends AppCompatActivity {
                 refreshPlayPauseButton();
             }
         };
-        registerReceiver(broadcastReceiver, new IntentFilter("RefreshPlayPause"));
+        registerReceiver(broadcastReceiver, new IntentFilter("RefreshPlayPause"), Context.RECEIVER_NOT_EXPORTED);
         broadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
@@ -280,7 +238,7 @@ public class ShorePlayer extends AppCompatActivity {
                 }
             }
         };
-        registerReceiver(broadcastReceiver, new IntentFilter("RefreshTimerText"));
+        registerReceiver(broadcastReceiver, new IntentFilter("RefreshTimerText"), Context.RECEIVER_NOT_EXPORTED);
     }
 
     private void refreshPlayPauseButton() {

@@ -359,7 +359,7 @@ public class MainActivity extends AppCompatActivity {
                 refreshPlayPauseButton();
             }
         };
-        registerReceiver(broadcastReceiver, new IntentFilter("RefreshPlayPause"));
+        registerReceiver(broadcastReceiver, new IntentFilter("RefreshPlayPause"), Context.RECEIVER_NOT_EXPORTED);
     }
 
     @Override

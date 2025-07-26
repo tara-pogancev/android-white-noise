@@ -217,12 +217,12 @@ public class RainPlayer extends AppCompatActivity {
         String hoursString = hoursText.getText().toString();
         int hoursInt = 0;
         int minutesInt = 0;
-        if (!hoursString.equals("")) {
+        if (!hoursString.isEmpty()) {
             hoursInt = Integer.parseInt(hoursString) * 60000 * 60;
         }
 
         String minutesString = minutesText.getText().toString();
-        if (!minutesString.equals("")) {
+        if (!minutesString.isEmpty()) {
             minutesInt = Integer.parseInt(minutesString) * 60000;
         }
 
@@ -233,7 +233,7 @@ public class RainPlayer extends AppCompatActivity {
         String hoursString = hours.getText().toString();
         int hoursInt = 0;
         int minutesInt = 0;
-        if (!hoursString.equals("")) {
+        if (!hoursString.isEmpty()) {
             hoursInt = Integer.parseInt(hoursString);
             if (hoursInt > 99 || hoursInt < 0) {
                 return false;
@@ -241,14 +241,14 @@ public class RainPlayer extends AppCompatActivity {
         }
 
         String minutesString = minutes.getText().toString();
-        if (!minutesString.equals("")) {
+        if (!minutesString.isEmpty()) {
             minutesInt = Integer.parseInt(minutesString);
             if (minutesInt > 59 || minutesInt < 0) {
                 return false;
             }
         }
 
-        if (minutesString.equals("") && hoursString.equals("")) {
+        if (minutesString.isEmpty() && hoursString.isEmpty()) {
             return false;
         }
 
@@ -270,7 +270,7 @@ public class RainPlayer extends AppCompatActivity {
                 refreshPlayPauseButton();
             }
         };
-        registerReceiver(broadcastReceiver, new IntentFilter("RefreshPlayPause"));
+        registerReceiver(broadcastReceiver, new IntentFilter("RefreshPlayPause"), Context.RECEIVER_NOT_EXPORTED);
         broadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
@@ -282,7 +282,7 @@ public class RainPlayer extends AppCompatActivity {
                 }
             }
         };
-        registerReceiver(broadcastReceiver, new IntentFilter("RefreshTimerText"));
+        registerReceiver(broadcastReceiver, new IntentFilter("RefreshTimerText"), Context.RECEIVER_NOT_EXPORTED);
     }
 
     private void refreshPlayPauseButton() {
