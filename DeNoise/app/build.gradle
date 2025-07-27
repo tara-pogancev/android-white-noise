@@ -13,7 +13,7 @@ android {
         targetSdk 36
         versionCode 4
         versionName "1.2.1"
-        resConfigs "en", "fr", "es", "it", "sr"
+        resourceConfigurations += ['en', 'fr', 'es', 'it', 'sr']
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
